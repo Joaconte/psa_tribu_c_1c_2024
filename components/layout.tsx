@@ -4,8 +4,6 @@ import SideBarItem from "./SidebarItem"
 import { ISidebarItem } from "./types"
 
 export default function Layout({ children }: { children: any }) {
-  const router = useRouter()
-
   const menuItems: ISidebarItem[] = [
     {
       href: "/",
@@ -24,8 +22,8 @@ export default function Layout({ children }: { children: any }) {
           title: "Joni",
         },
         {
-          href: "/grilla",
-          title: "Grilla",
+          href: "/horasTrabajadas",
+          title: "Horas Trabajadas",
         },
       ],
     },
