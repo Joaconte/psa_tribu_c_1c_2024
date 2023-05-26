@@ -10,23 +10,13 @@ export default function Layout({ children }: { children: any }) {
       title: "Homepage",
     },
     {
-      href: "/about",
-      title: "About",
+      href: "/clientes",
+      title: "Clientes",
     },
     {
-      href: "/contact",
-      title: "Contact",
-      children: [
-        {
-          href: "/phone",
-          title: "Phone",
-        },
-        {
-          href: "/horasTrabajadas",
-          title: "Horas Trabajadas",
-        },
-      ],
-    },
+      href: "/usuarios",
+      title: "Usuarios",
+    }
   ]
 
   return (

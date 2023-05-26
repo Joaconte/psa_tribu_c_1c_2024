@@ -1,4 +1,4 @@
-import { Usuario } from "@/pages/contact/types"
+import { Usuario } from "@/pages/types"
 
 export interface ISidebarItem {
   href: string
