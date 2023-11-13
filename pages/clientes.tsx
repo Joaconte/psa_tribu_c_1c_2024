@@ -1,4 +1,3 @@
-import {Cliente} from "@/pages/types";
 import {useEffect, useState} from "react";
 import ClientGridRow from "@/components/clientGridRow";
 
@@ -12,15 +11,10 @@ export default function Clientes() {
     useEffect(() => {
         fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/clientes-psa/1.0.0/m/api/clientes")
             .then((res) => {
-                console.log("res", res)
                 return res.json()
             })
             .then((data) => {
-                console.log("data", data)
                 setList(data)
-                console.log("List 1")
-                console.log(list)
-                console.log("List 2")
             })
     }, [])
 
@@ -46,7 +40,7 @@ export default function Clientes() {
 
                                 <tbody>
                                 {list.map((cliente) => (
-                                    <ClientGridRow cliente={cliente} />
+                                    <ClientGridRow key={cliente['razon_social']} cliente={cliente} />
                                 ))}
                                 </tbody>
                             </table>

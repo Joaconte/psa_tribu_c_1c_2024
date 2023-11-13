@@ -11,11 +11,9 @@ export default function Usuarios() {
   useEffect(() => {
     fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos")
       .then((res) => {
-        console.log("res", res)
         return res.json()
       })
       .then((data) => {
-        console.log("data", data)
         setList(data)
       })
   }, [])
@@ -43,7 +41,7 @@ export default function Usuarios() {
 
                 <tbody>
                   {list.map((usuario) => (
-                    <UserGridRow usuario={usuario} />
+                    <UserGridRow key={usuario['legajo']} usuario={usuario} />
                   ))}
                 </tbody>
               </table>
