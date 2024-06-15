@@ -162,3 +162,187 @@ export const PROJECTS = [
       "estado": "terminado"
     }
   ];
+  
+export const TASKS = [
+  {
+    "codigo": "001",
+    "titulo": "Implementar autenticación",
+    "desarrollador": "Juan Perez",
+    "fechaInicio": "2023-01-15",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "002",
+    "titulo": "Diseñar la base de datos",
+    "desarrollador": "Ana Gomez",
+    "fechaInicio": "2023-01-20",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "003",
+    "titulo": "Crear interfaz de usuario",
+    "desarrollador": "Carlos Ruiz",
+    "fechaInicio": "2023-02-01",
+    "fechaFin": "2023-02-28",
+    "estado": "cerrada",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "004",
+    "titulo": "Integrar API externa",
+    "desarrollador": "Lucia Martinez",
+    "fechaInicio": "2023-03-05",
+    "fechaFin": null,
+    "estado": "bloqueada",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "005",
+    "titulo": "Optimizar rendimiento",
+    "desarrollador": "Miguel Sanchez",
+    "fechaInicio": "2023-04-10",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "006",
+    "titulo": "Escribir documentación",
+    "desarrollador": "Sofia Lopez",
+    "fechaInicio": "2023-05-15",
+    "fechaFin": "2023-05-30",
+    "estado": "cerrada",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "007",
+    "titulo": "Configurar CI/CD",
+    "desarrollador": "Daniel Fernandez",
+    "fechaInicio": "2023-06-20",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "008",
+    "titulo": "Realizar pruebas unitarias",
+    "desarrollador": "Elena Ramirez",
+    "fechaInicio": "2023-07-25",
+    "fechaFin": null,
+    "estado": "bloqueada",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "009",
+    "titulo": "Desplegar aplicación",
+    "desarrollador": "Fernando Silva",
+    "fechaInicio": "2023-08-30",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "010",
+    "titulo": "Migrar a la nube",
+    "desarrollador": "Gabriela Torres",
+    "fechaInicio": "2023-09-05",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "011",
+    "titulo": "Configurar servidor",
+    "desarrollador": "Hector Jimenez",
+    "fechaInicio": "2023-10-10",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "012",
+    "titulo": "Actualizar dependencias",
+    "desarrollador": "Isabel Nunez",
+    "fechaInicio": "2023-11-15",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "013",
+    "titulo": "Revisar código",
+    "desarrollador": "Jorge Morales",
+    "fechaInicio": "2023-12-20",
+    "fechaFin": "2024-01-05",
+    "estado": "cerrada",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "014",
+    "titulo": "Implementar caché",
+    "desarrollador": "Karen Ortega",
+    "fechaInicio": "2024-01-25",
+    "fechaFin": null,
+    "estado": "bloqueada",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "015",
+    "titulo": "Mejorar seguridad",
+    "desarrollador": "Luis Mendoza",
+    "fechaInicio": "2024-02-10",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "016",
+    "titulo": "Implementar notificaciones",
+    "desarrollador": "Maria Rojas",
+    "fechaInicio": "2024-03-15",
+    "fechaFin": "2024-03-30",
+    "estado": "cerrada",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "017",
+    "titulo": "Desarrollar módulo de pagos",
+    "desarrollador": "Nicolas Paredes",
+    "fechaInicio": "2024-04-20",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "alta"
+  },
+  {
+    "codigo": "018",
+    "titulo": "Optimizar base de datos",
+    "desarrollador": "Olivia Vega",
+    "fechaInicio": "2024-05-25",
+    "fechaFin": null,
+    "estado": "bloqueada",
+    "prioridad": "media"
+  },
+  {
+    "codigo": "019",
+    "titulo": "Implementar control de versiones",
+    "desarrollador": "Pedro Flores",
+    "fechaInicio": "2024-06-30",
+    "fechaFin": null,
+    "estado": "en progreso",
+    "prioridad": "baja"
+  },
+  {
+    "codigo": "020",
+    "titulo": "Actualizar diseño",
+    "desarrollador": "Raquel Suarez",
+    "fechaInicio": "2024-07-05",
+    "fechaFin": null,
+    "estado": "nueva",
+    "prioridad": "alta"
+  }
+]
+
