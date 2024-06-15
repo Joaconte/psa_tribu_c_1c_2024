@@ -10,19 +10,19 @@ export default function Layout({ children }: { children: any }) {
       title: "Homepage",
     },
     {
-      href: "/clientes",
-      title: "Clientes",
+      href: "/proyectos",
+      title: "Proyectos",
     },
     {
-      href: "/usuarios",
-      title: "Usuarios",
+      href: "/soporte",
+      title: "Soporte",
     }
   ]
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="bg-black sticky top-0 h-14 flex justify-center items-center font-semibold uppercase text-white">
-        Ejemplo pantalla
+        Praxis Systems Argentina
       </header>
       <div className="flex flex-col md:flex-row flex-1">
         <aside className="bg-grey-100 w-full md:w-60">

@@ -23,9 +23,9 @@ export default function Usuarios() {
 
       {/* ACA EMPIEZA LA GRILLA */}
 
-      <div className="container max-w-7xl mx-auto mt-8">
+      <div className="container max-w-7xl mx-auto mt-8 space-y-4">
         <div className="mb-4">
-          <h1 className="text-3xl font-bold decoration-gray-400">Usuarios</h1>
+          <h1 className="text-3xl font-bold decoration-gray-400">Proyectos</h1>
         </div>
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -33,21 +33,26 @@ export default function Usuarios() {
               <table className="min-w-full">
                 <thead>
                   <tr>
-                    <HeaderItem title="ID" />
-                    <HeaderItem title="Nombre" />
-                    <HeaderItem title="Apellido" />
+                    <HeaderItem title="Código" />
+                    <HeaderItem title="Proyecto" />
+                    <HeaderItem title="Líder" />
+                    <HeaderItem title="Fecha estimada de finalización" />
+                    <HeaderItem title="Estado" />
+                    <HeaderItem title="Tareas" />
                   </tr>
                 </thead>
-
                 <tbody>
-                  {list.map((usuario) => (
-                    <UserGridRow key={usuario['legajo']} usuario={usuario} />
+                  {list.map((proyecto) => (
+                    <UserGridRow key={proyecto['code']} proyecto={proyecto} />
                   ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
+        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
+        focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
+        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Nuevo proyecto</button>
       </div>
     </>
   )
