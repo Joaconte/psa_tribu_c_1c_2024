@@ -40,8 +40,7 @@ export default function Proyectos() {
                       <ProyectGridRow key={proyecto['code']} proyecto={proyecto} />
                     ))}
                   </tbody>
-                </table>
-                
+                </table>                
               </div>
               <div>
               <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 

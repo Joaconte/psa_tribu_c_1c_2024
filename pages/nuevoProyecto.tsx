@@ -1,9 +1,32 @@
 import Image from "next/image"
+import RecursoItemSelect from "@/components/recursoItemSelect"
 import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ["latin"] })
 import Link from "next/link";
 
+import { useEffect, useState } from "react"
+
+async function logMovies() {
+  const response = await fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos");
+  const movies = await response.json();
+  console.log(movies);
+}
+
 export default function NuevoProyecto() {
+
+  const [list, setList] = useState([])
+
+  logMovies()
+
+  useEffect(() => {
+    fetch("https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos")
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            setList(data)
+        })
+}, [])
   return (
 
     <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
@@ -12,13 +35,17 @@ export default function NuevoProyecto() {
           
         <div className="space-y-2">
           <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Título</label>
-          <textarea id="message" rows="1" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-          placeholder="Ingrese el título"></textarea>
+          <input type="text" id="message" rows="1" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+          placeholder="Ingrese el título"></input>
         </div>
         
         <div className="space-y-2">
           <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Estado</label>
-          <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></select>
+          <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option>Iniciado</option>
+            <option>Suspendido</option>
+            <option>Terminado</option>
+          </select>
         </div>
 
         <div className="space-y-2">
@@ -30,13 +57,12 @@ export default function NuevoProyecto() {
         <form class="max-w-sm">
           <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Lider</label>
           <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>Placeholder</option>
-            <option value="US">Placeholder</option>
-            <option value="CA">Placeholder</option>
-            <option value="FR">Placeholder</option>
-            <option value="DE">Placeholder</option>
+          {list.map((recurso) => (
+                      <RecursoItemSelect key={recurso['legajo']} recurso={recurso} />
+                    ))}
           </select>
         </form>
+
 
         <div className="space-y-1">
           <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Fecha estimada de finalización</label>

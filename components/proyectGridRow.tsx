@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
   return (
     <tr key={`${proyecto['codigo']}`}>
@@ -6,7 +8,7 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       </td>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="flex items-center">{proyecto['titulo']}</div>
+        <Link className="flex items-center" href={`/nuevoProyecto`}>{proyecto['titulo']}</Link>
       </td>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
