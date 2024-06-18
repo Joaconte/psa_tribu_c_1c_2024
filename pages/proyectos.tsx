@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import ProyectGridRow from "@/components/proyectGridRow"
+import { ContinueButton } from "@/components/buttons"
 import { PROJECTS } from "./api/projects";
 
 function HeaderItem({ title }: { title: string }) {
@@ -9,13 +10,25 @@ function HeaderItem({ title }: { title: string }) {
 export default function Proyectos() {
   const [list, setList] = useState([])
   useEffect(() => {
-    // En lugar de hacer un fetch, simplemente usa los datos importados
-    setList(PROJECTS);
-  }, []); // Se ejecuta una sola vez cuando el componente se monta
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setList(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <>
-      <div className="container max-w-7xl mx-auto mt-8 space-y-6">
+      <div className="container max-w-7xl mt-8 space-y-6">
         <div className="mb-4">
           <h1 className="text-3xl font-bold decoration-gray-400">Proyectos</h1>
         </div>
@@ -36,16 +49,13 @@ export default function Proyectos() {
                   </thead>
                   <tbody>
                     {list.map((proyecto) => (
-                      <ProyectGridRow key={proyecto['code']} proyecto={proyecto} />
+                      <ProyectGridRow key={proyecto['projectCode']} proyecto={proyecto} />
                     ))}
                   </tbody>
                 </table>                
               </div>
               <div>
-              <a className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
-                dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                href={`/proyecto/nuevoProyecto`}> Nuevo proyecto </a>
+                <ContinueButton text = "Nuevo proyecto" href="/proyecto/nuevoProyecto"/> 
               </div>
             </div>
           </div>

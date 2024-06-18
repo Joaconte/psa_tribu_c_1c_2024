@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import TaskGridRow from "@/components/taskGridRow"
-import Link from "next/link";
+import { ContinueButton } from "@/components/buttons"
 import { TASKS } from "./api/projects";
 
 function HeaderItem({ title }: { title: string }) {
@@ -24,7 +24,7 @@ export default function Proyectos() {
 
   return (
     <>
-      <div className="container max-w-7xl mx-auto mt-8 space-y-6">
+      <div className="container max-w-7xl mt-8 space-y-6">
         <div className="mb-4">
           <h1 className="text-3xl font-bold decoration-gray-400">Tareas</h1>
         </div>
@@ -51,10 +51,7 @@ export default function Proyectos() {
                 </table>
               </div>
               <div>
-              <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
-                dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                href={`/tarea/nuevaTarea`}> Nueva tarea </Link>
+                <ContinueButton text = "Nueva tarea" href="/tarea/nuevaTarea"/>
               </div>
             </div>
           </div>

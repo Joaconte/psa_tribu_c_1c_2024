@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 function InputText({ label, placeholder }: {label: string, placeholder: string}) {
     return (
         <div className="space-y-2">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Título</label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
           <input type="text" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
           border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
@@ -16,7 +16,7 @@ function PreChargedInputText({ label, input }: {label: string, input: string}) {
     const [text, setText] = useState(input);
     return (
       <div>
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Título</label> 
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label> 
         <input type="text" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
         border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
           dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
@@ -29,7 +29,7 @@ function PreChargedInputText({ label, input }: {label: string, input: string}) {
     return (
       <div className="space-y-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
-        <textarea rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
+        <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
         border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
         dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
         placeholder={placeholder}></textarea>
@@ -43,7 +43,7 @@ function PreChargedTextArea({ label, input }: {label: string, input: string}) {
   return (
     <div className="space-y-2">
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
-      <textarea rows="5" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
+      <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border 
       border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
       dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
       value={text} onChange={(e) => setText(e.target.value)}></textarea>

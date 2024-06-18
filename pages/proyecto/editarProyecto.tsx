@@ -3,8 +3,6 @@ const inter = Inter({ subsets: ["latin"] })
 import { CancelButton, ContinueButton } from "@/components/buttons"
 import {PreChargedInputText, OptionsList, PreChargedTextArea, InputDate} from "@/components/editLayerComponents" 
 
-
-
 export default function EditarProyecto() {
   return (
 

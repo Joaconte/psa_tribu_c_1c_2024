@@ -9,19 +9,19 @@ function CommonItem({text}: {text: any}){
 export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
 
   return (
-    <tr key={`${proyecto['codigo']}`}>
+    <tr key={`${proyecto['projectCode']}`}>
 
-      <CommonItem text={proyecto['codigo']}/>
+      <CommonItem text={proyecto['projectCode']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <a href={`/proyecto/${encodeURIComponent(proyecto['codigo'])}`} 
-        className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">{proyecto['titulo']}</a>
+        <a href={`/proyecto/${encodeURIComponent(proyecto['projectCode'])}`} 
+        className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">{proyecto['name']}</a>
       </td>
 
-      <CommonItem text={proyecto['lider']}/>
-      <CommonItem text={proyecto['fechaInicio']}/>
-      <CommonItem text={proyecto['fechaFin']}/>
-      <CommonItem text={proyecto['estado']}/>
+      <CommonItem text={proyecto['leaderCode']}/>
+      <CommonItem text={proyecto['startDate']}/>
+      <CommonItem text={proyecto['endDate']}/>
+      <CommonItem text={proyecto['status']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <a href={`/tareas`} className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">ver</a>

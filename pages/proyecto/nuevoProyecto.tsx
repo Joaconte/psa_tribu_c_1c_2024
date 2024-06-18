@@ -15,30 +15,25 @@ export default function NuevoProyecto() {
 
   const router = useRouter();
 
-  /*
+
   useEffect(() => {
-
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const fetchResources = async () => {
+      const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
+      try {
+        const response = await fetch(`${url}/nuevoProyecto`);
+        console.log(response);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setList(data);
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+      }
     };
-    const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
 
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((res) => {
-        setResources(res);
-      })
-      .catch((err) => router.push("/error"));
+    fetchResources();
   }, []);
-
-          {list.map((recurso) => (
-                      <RecursoItemSelect key={recurso['legajo']} recurso={recurso} />
-                    ))}
-
-  */
 
   return (
 
@@ -50,10 +45,16 @@ export default function NuevoProyecto() {
 
         <OptionsList label = "Estado" options = {["Iniciado", "Suspendido", "Terminado"]}/>
 
-        <TextArea label = "Descripción" placeholder="Ingrese la descripcion..."/>
+        <TextArea label = "Descripción" placeholder="Ingrese la descripción..."/>
 
         <OptionsList label = "Lider" options = {["SASA", "CSAD", "ASDQE"]}/>
+
         
+        <div>
+          {list.map((recurso) => (
+          <RecursoItemSelect recurso={recurso} />))}
+        <div/>
+
         <InputDate/>
         
         <div className="flex justify-center items-center bg-white space-x-10">        
@@ -62,5 +63,6 @@ export default function NuevoProyecto() {
         </div>
       </div>
     </div>
+  </div>
   )
 }

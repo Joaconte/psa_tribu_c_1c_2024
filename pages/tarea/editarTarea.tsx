@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ["latin"] })
-import {InputText, PreChargedInputText, OptionsList, Description, Date} from "@/components/editLayerComponents" 
+import {PreChargedInputText, OptionsList, PreChargedTextArea, InputDate} from "@/components/editLayerComponents" 
 import { CancelButton, ContinueButton } from "@/components/buttons"
 
 export default function EditarTarea() {
@@ -18,9 +18,9 @@ export default function EditarTarea() {
 
         <OptionsList label = "Prioridad" options = {["Baja", "Media", "Alta"]}/>
 
-        <Description/>
+        <PreChargedTextArea label = "Descripción" input = "DESCRIPCION LALALA" />
         
-        <Date/>
+        <InputDate/>
         
         <div className="flex justify-center items-center bg-white space-x-10">   
             <CancelButton/>     
