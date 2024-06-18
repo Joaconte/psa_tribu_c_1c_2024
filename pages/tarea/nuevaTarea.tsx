@@ -2,7 +2,7 @@ import Image from "next/image"
 import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ["latin"] })
 import { CancelButton, ContinueButton } from "@/components/buttons"
-import {InputText, OptionsList, Description, Date} from "@/components/editLayerComponents" 
+import {InputText, OptionsList, TextArea, InputDate} from "@/components/editLayerComponents" 
 
 export default function NuevaTarea() {
   return (
@@ -11,16 +11,17 @@ export default function NuevaTarea() {
       <h1 className="text-4xl mb-5 font-bold ">NuevaTarea</h1>
       <div className="container max-w-7xl mx-auto mt-8 space-y-7">
           
-        
-        <InputText label="Título" placeholder="Ingrese el título"/>
-
-        <OptionsList label = "Estado" options = {["Nueva", "En progreso", "Cerrada", "Bloqueada"]}/>
-
-        <Description/>
+        <InputText label = "Título" placeholder="Ingrese el título"/>
 
         <OptionsList label = "Desarrollador designado" options = {["Placeholder", "Placeholder", "Placeholder", "Placeholder"]}/>
 
-        <Date/>
+        <OptionsList label = "Estado" options = {["Nueva", "En progreso", "Cerrada", "Bloqueada"]}/>
+
+        <OptionsList label = "Prioridad" options = {["Baja", "Media", "Alta"]}/>
+
+        <TextArea label = "Descripción" placeholder="Ingrese la descripción..."/>
+
+        <InputDate/>
       
         <div className="flex justify-center items-center bg-white space-x-10">        
           <CancelButton/>     

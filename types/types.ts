@@ -1,12 +1,5 @@
-export interface Usuario {
-  nombre: string
-  apellido: string
-  legajo: number
+export interface Recurso {
+  legajo: string;
+  nombre: string;
+  apellido: string;
 }
-
-export interface Cliente {
-  id: string
-  razon_social: string
-  cuit: number
-}
-
