@@ -52,7 +52,7 @@ export default function NuevoProyecto() {
         
         <div>
           {list.map((recurso) => (
-          <RecursoItemSelect recurso={recurso} />))}
+          <RecursoItemSelect key={recurso['legajo']} recurso={recurso} />))}
         <div/>
 
         <InputDate/>
