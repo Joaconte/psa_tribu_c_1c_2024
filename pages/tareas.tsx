@@ -11,7 +11,7 @@ export default function Proyectos() {
   const [list, setList] = useState([])
   useEffect(() => {
     // En lugar de hacer un fetch, simplemente usa los datos importados
-    setList(TASKS);
+   // setList(TASKS);
   }, []); // Se ejecuta una sola vez cuando el componente se monta
 
   function Column({ estado }: { estado: string }) {
