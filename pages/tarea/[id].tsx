@@ -9,8 +9,8 @@ export default function Proyecto() {
       <h1 className="text-4xl mb-5 font-bold ">Tarea</h1>
       <div className="container max-w-7xl mx-auto mt-8 space-y-7">
           
-      <div className="space-y-2">
-          <label className="">Código: </label>
+        <div className="space-y-2">
+            <label className="">Código: </label>
         </div>
         <div className="space-y-2">
             <label className="">Desarrollador a cargo: </label>

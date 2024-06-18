@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function TaskGridRow({ tarea }: {tarea: any}) {
   return (
     <tr key={`${tarea['codigo']}`}>

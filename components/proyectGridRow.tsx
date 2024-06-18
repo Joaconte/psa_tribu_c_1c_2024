@@ -3,10 +3,8 @@ function CommonItem({text}: {text: any}){
     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
       <div className="flex items-center">{text}</div>
     </td>
-
   )
 }
-
 
 export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
 
@@ -24,7 +22,6 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       <CommonItem text={proyecto['fechaInicio']}/>
       <CommonItem text={proyecto['fechaFin']}/>
       <CommonItem text={proyecto['estado']}/>
-
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <a href={`/tareas`} className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">ver</a>
