@@ -1,5 +1,4 @@
 import ProyectLayer from "@/components/projectLayer";
-import ProyectGridRow from "@/components/proyectGridRow";
 import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ["latin"] })
 import { useRouter } from 'next/router'

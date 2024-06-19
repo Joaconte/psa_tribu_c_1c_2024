@@ -1,4 +1,3 @@
-import ProyectLayer from "@/components/projectLayer";
 import TaskLayer from "@/components/taskLayer";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";

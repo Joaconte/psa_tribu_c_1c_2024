@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 
 function HeaderItem({ title }: { title: string }) {
-  return <th className="px-6 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
+  return <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
 }
 
 export default function Tareas() {
@@ -38,11 +38,11 @@ export default function Tareas() {
 
 
   function Column({ estado }: { estado: string }) {
-    return <td> {list.filter((tarea)=> tarea['status'] === estado)
+    return <tr> {list.filter((tarea)=> tarea['status'] === estado)
     .map((tarea) => (
       <TaskGridRow key={tarea['name']} tarea={tarea} />
     ))}
-    </td>
+    </tr>
   }
 
   return (
@@ -64,10 +64,10 @@ export default function Tareas() {
                     </tr>
                   </thead>
                   <tbody >
-                      <Column estado="NEW"/>
-                      <Column estado="IN_PROGRESS" />
-                      <Column estado="CLOSED" />
-                      <Column estado="BLOCK" />
+                    <Column estado="NEW"/>
+                    <Column estado="IN_PROGRESS" />
+                    <Column estado="CLOSED" />
+                    <Column estado="BLOCK" />
                   </tbody>
                 </table>
               </div>

@@ -33,7 +33,7 @@ function Label({text, value}: {text: string, value: string}){
                     dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                     href={{
                         pathname: `/proyectos/${encodeURIComponent(task['projectCode'])}/tareas/${encodeURIComponent(task['taskCode'])}`,
-                        query: `${(task['taskCode'])}` // the data
+                        query: `${(task['taskCode'])}`
                     }}>Actualizar datos</Link>  
                 </div>
             </div>  

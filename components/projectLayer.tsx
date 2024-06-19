@@ -28,7 +28,7 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Fecha de inicio:" value={project['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={project['endDate']}/>
                 <div className="flex justify-center items-center bg-white space-x-10">  
-                <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"} />
+                <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"}/>
                 </div>
             </div>  
         </div>  
