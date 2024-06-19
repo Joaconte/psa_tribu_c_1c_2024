@@ -38,6 +38,7 @@ export default function EditarProyecto() {
         <h1 className="text-4xl mb-5 font-bold ">Modificar proyecto</h1>
         <div className="container max-w-7xl mx-auto mt-8 space-y-7">
     
+  
           <OptionsList label = "Estado" options = {["Iniciado", "Suspendido", "Terminado"]}/>
   
           <PreChargedTextArea label = "Descripción" input = "DESCRIPCION LALALA" />
