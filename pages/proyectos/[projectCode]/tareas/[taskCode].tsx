@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google"
 const inter = Inter({ subsets: ["latin"] })
 
+
 export default function Proyecto() {
 
   return (
@@ -8,7 +9,6 @@ export default function Proyecto() {
     <div className="mt-8 flex h-full flex-col space-x-0 space-y-15 bg-white">
       <h1 className="text-4xl mb-5 font-bold ">Tarea</h1>
       <div className="container max-w-7xl mx-auto mt-8 space-y-7">
-          
         <div className="space-y-2">
             <label className="">Código: </label>
         </div>

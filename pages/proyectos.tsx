@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import ProyectGridRow from "@/components/proyectGridRow"
 import { ContinueButton } from "@/components/buttons"
-import { PROJECTS } from "./api/projects";
+
 
 function HeaderItem({ title }: { title: string }) {
   return <th className="px-6 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
 }
 
+
 export default function Proyectos() {
   const [list, setList] = useState([])
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -22,7 +24,6 @@ export default function Proyectos() {
         console.error("Error fetching projects:", error);
       }
     };
-
     fetchProjects();
   }, []);
 
@@ -55,7 +56,7 @@ export default function Proyectos() {
                 </table>                
               </div>
               <div>
-                <ContinueButton text = "Nuevo proyecto" href="/proyecto/nuevoProyecto"/> 
+                <ContinueButton text = "Nuevo proyecto" href="/proyectos/nuevoProyecto"/> 
               </div>
             </div>
           </div>

@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 function CommonItem({text}: {text: any}){
   return(
     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -14,8 +16,13 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       <CommonItem text={proyecto['projectCode']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <a href={`/proyecto/${encodeURIComponent(proyecto['projectCode'])}`} 
-        className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">{proyecto['name']}</a>
+        <Link  className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          href={{
+            pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}`,
+            query: `${(proyecto['projectCode'])}` // the data
+          }}
+        >{proyecto['name']}
+        </Link>
       </td>
 
       <CommonItem text={proyecto['leaderCode']}/>
@@ -24,7 +31,7 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       <CommonItem text={proyecto['status']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <a href={`/tareas`} className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">ver</a>
+        <a href={`/proyectos/01/tareas`} className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">ver</a>
       </td>
     </tr>
   )
