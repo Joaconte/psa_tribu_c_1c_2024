@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import TaskGridRow from "@/components/taskGridRow"
-import { ContinueButton } from "@/components/buttons"
-import Link from 'next/link'
+import { ContinueCodeProjectButton } from "@/components/buttons"
+import { useRouter } from 'next/router'
 
 
 function HeaderItem({ title }: { title: string }) {
@@ -9,18 +9,19 @@ function HeaderItem({ title }: { title: string }) {
 }
 
 export default function Tareas() {
+
+  const router = useRouter();
   const [list, setList] = useState([])
+  var projectCode = router.query.projectCode;
 
   useEffect(() => {
-    
-    const getProjectCode = async () =>{
-      return window.location.href.slice(-9, -7);
-    }
 
     const fetchProjects = async () => {
+
+      projectCode = router.query.projectCode;
       
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${getProjectCode()}/tasks`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -29,10 +30,10 @@ export default function Tareas() {
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
+      console.log(projectCode)
     };
 
     fetchProjects();
-    console.log(getProjectCode())
   }, []);
 
 
@@ -63,17 +64,15 @@ export default function Tareas() {
                     </tr>
                   </thead>
                   <tbody >
-                    <tr>
-                    <Column estado="NEW"/>
-                    <Column estado="IN_PROGRESS" />
-                    <Column estado="CLOSED" />
-                    <Column estado="BLOCK" />
-                    </tr>
+                      <Column estado="NEW"/>
+                      <Column estado="IN_PROGRESS" />
+                      <Column estado="CLOSED" />
+                      <Column estado="BLOCK" />
                   </tbody>
                 </table>
               </div>
               <div>
-                <ContinueButton text = "Nueva tarea" href="/proyectos/01/tareas/nuevaTarea"/>
+                <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
               </div>
             </div>
           </div>

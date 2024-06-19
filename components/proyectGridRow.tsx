@@ -31,7 +31,11 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       <CommonItem text={proyecto['status']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <a href={`/proyectos/01/tareas`} className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline">ver</a>
+        <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              href={{
+                  pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}/tareas`,
+                  query: `${(proyecto['projectCode'])}` // the data
+              }}>ver</Link>
       </td>
     </tr>
   )
