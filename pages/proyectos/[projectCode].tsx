@@ -4,11 +4,24 @@ const inter = Inter({ subsets: ["latin"] })
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 
+import { Project } from "@/types/types";
+
 
 export default function Proyecto() {
 
   const router = useRouter();
-  const [project, setproject] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [project, setproject] = useState<Project>({
+    projectCode: "null",
+    leaderCode: "null",
+    productCode: "null",
+    name: "null",
+    startDate: "null",
+    endDate: "null",
+    description: "null",
+    status: "null",
+  });
+
   var projectCode = router.query.projectCode;
 
   useEffect(() => {
@@ -21,14 +34,25 @@ export default function Proyecto() {
         }
         const data = await response.json();
         setproject(data);
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
     fetchProject();
+
   }, []);
 
+
+  if (loading) {
+    return <div>Loading...</div>; // Puedes mostrar un mensaje de carga o spinner aquí si lo deseas
+  }
+
+  if (!project) {
+    return <div>Error al cargar el proyecto</div>; // Maneja la situación cuando no se puede cargar el proyecto
+  }
+
   return (
-      <ProyectLayer project = {project}/>
+    <ProyectLayer project = {project}/>
   )
 }

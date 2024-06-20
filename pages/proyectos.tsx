@@ -10,6 +10,7 @@ function HeaderItem({ title }: { title: string }) {
 
 export default function Proyectos() {
   const [list, setList] = useState([])
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -20,12 +21,21 @@ export default function Proyectos() {
         }
         const data = await response.json();
         setList(data);
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
     fetchProjects();
   }, []);
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!list) {
+    return <div>Error al cargar los proyectos</div>; 
+  }
 
   return (
     <>

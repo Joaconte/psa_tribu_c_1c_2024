@@ -1,4 +1,6 @@
-import { ContinueCodeProjectButton } from "./buttons"
+import { Project } from "@/types/types"
+import { DeleteButton, ContinueCodeProjectButton } from "./buttons"
+import React from "react";
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -27,8 +29,8 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Descripción:" value={project['description']}/>
                 <Label text="Fecha de inicio:" value={project['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={project['endDate']}/>
-                <div className="flex justify-center items-center bg-white space-x-10">  
-                <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"}/>
+                <div className="flex justify-center items-center bg-white space-x-10"> 
+                  <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"}/>
                 </div>
             </div>  
         </div>  
