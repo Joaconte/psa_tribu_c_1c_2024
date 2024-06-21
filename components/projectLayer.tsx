@@ -1,6 +1,7 @@
 import { Project } from "@/types/types"
-import { DeleteButton, ContinueCodeProjectButton } from "./buttons"
+import { DeleteButton, ContinueCodeProjectButton, BackButton } from "./buttons"
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -16,7 +17,7 @@ function Label({text, value}: {text: string, value: string}){
     )
   }
   
-  export default function ProyectLayer({ project }: {project: any}) {
+  export default function ProyectLayer({ project }: {project: Project}) {
   
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
@@ -30,6 +31,9 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Fecha de inicio:" value={project['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={project['endDate']}/>
                 <div className="flex justify-center items-center bg-white space-x-10"> 
+                <BrowserRouter>
+                  <BackButton text = "Volver"/>
+                </BrowserRouter>
                   <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"}/>
                 </div>
             </div>  

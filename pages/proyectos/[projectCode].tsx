@@ -8,7 +8,6 @@ import { Project } from "@/types/types";
 
 
 export default function Proyecto() {
-
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [project, setproject] = useState<Project>({

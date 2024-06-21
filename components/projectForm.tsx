@@ -3,33 +3,19 @@ import React, { useState } from "react";
 import { ProjectState } from "./enums";
 
 import {PreChargedOptionsList, PreChargedInputText, PreChargedTextArea, InputDate} from "@/components/editLayerComponents" 
-import { CancelButton, ContinueButton } from "@/components/buttons"
+import { BackButton} from "@/components/buttons"
+import { BrowserRouter, useNavigate } from "react-router-dom";
 
-interface ProjectFormProps {
-        project: Project;
-    }
-  
-interface ProjectFormState {
-    project: Project;
-  }
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     return enumObj[str as keyof typeof enumObj];
   }
-  
 
-export class ProjectForm extends React.Component<ProjectFormProps, ProjectFormState> {    
-    constructor(props: any) {
-      super(props);
-      this.state =  {
-        project: props.project, 
-      };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
+  export const ProjectForm = ({ project }: {project: Project}): JSX.Element => {
 
-    modProyect(project: Project){
+    const navigate = useNavigate();
+
+    function modProyect(){
 
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project.projectCode}`, {
         method: 'PUT',
@@ -38,19 +24,14 @@ export class ProjectForm extends React.Component<ProjectFormProps, ProjectFormSt
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            projectCode: project.projectCode,
-            leaderCode: parseInt(project.leaderCode),
-            productCode: project.productCode,
-            name: project.name,
-            startDate: project.startDate,
-            endDate: project.endDate,
-            description: project.description,
-            status: getEnumValueFromString(ProjectState, project.status),
+            ...updatedProject,
+            leaderCode: parseInt(updatedProject.leaderCode),
+            status: getEnumValueFromString(ProjectState, updatedProject.status),
         })
         }).then(response => {
         if (!response.ok) {
-        return response.json().then(errorInfo => Promise.reject(errorInfo));
-        }
+            return response.json().then(errorInfo => Promise.reject(errorInfo));
+            }
         return response.json();
         })
         .then(data => {
@@ -58,67 +39,56 @@ export class ProjectForm extends React.Component<ProjectFormProps, ProjectFormSt
         })
         .catch(error => {
             console.error('Error creating project:', error);
-        });
+        });        
     }
 
+    const [ updatedProject, setProjectInfo] = useState<Project>(project);
 
-    handleChange(event: React.ChangeEvent<any>) {
-        const { name, value } = event.target;
-        console.log("CAMBIO TO " + value  )
-        this.setState({
-        project: {
-            ...this.state.project,
-            [name]: value,
-        },
-        });
-    }
-    handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        console.log(this.state.project)
+    function handleSubmit() {
 
-        if (!this.state.project.name)
+        if (!project.name)
             alert("El proyecto tiene que tener un título");
-
-        if (this.state.project.startDate && this.state.project.endDate && new Date(this.state.project.startDate) > new Date(this.state.project.endDate))
+        else if (updatedProject.startDate && updatedProject.endDate && new Date(updatedProject.startDate) > new Date(updatedProject.endDate))
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
-        else
-            this.modProyect(this.state.project);
+        else{
+            modProyect();
+            navigate(-1)
+        }
     }
-  
-  render() {
-    const { project } = this.state;
-      return (
-        <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
-            <form onSubmit={this.handleSubmit}>
-                <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
-                <PreChargedInputText name = "name" label = "Título" value={project.name} onChange = {this.handleChange}/>
 
-                <PreChargedOptionsList name = "status" label = "Estado" value={project.status}  options = {["Iniciado", "Suspendido", "Terminado"]} onChange = {this.handleChange}/>
+    return (
 
-                <PreChargedTextArea name = "description" label = "Descripción" value = {project["description"]} onChange = {this.handleChange}/>
+        <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
+            <PreChargedInputText name = "name" label = "Título" value={updatedProject.name} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
-                <PreChargedOptionsList name = "leaderCode" label = "Lider" value={project.leaderCode}  options = {[]} onChange = {this.handleChange}/>
+            <PreChargedOptionsList name = "status" label = "Estado" value={updatedProject.status}  options = {["Iniciado", "Suspendido", "Terminado"]} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}/>
 
-                <div className = "flex bg-white space-x-14" >
-
-                    <InputDate name = "startDate" label = "Fecha de inicio" value={project.leaderCode} onChange = {this.handleChange}/>
-
-                    <InputDate name = "endDate" label = "Fecha estimada de finalizacion" value={project.leaderCode} onChange = {this.handleChange}/>
-
-                </div>
-                
-                <div className="flex justify-center items-center bg-white space-x-10">   
-                    <CancelButton/>     
+            <PreChargedTextArea name = "description" label = "Descripción" value = {updatedProject.description} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
-                    <input className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-                    focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
-                    dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" 
-                    type="submit" value="Aplicar cambios"/>     
-                </div>     
-                </div>
-            </form>
-        </div>  
-      );
-    }
-  }
-  
+            <PreChargedOptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode}  options = {[]} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
+
+            <div className = "flex bg-white space-x-14" >
+                <InputDate name = "startDate" label = "Fecha de inicio" value={updatedProject.startDate} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, startDate: e.target.value }))}/>
+
+                <InputDate name = "endDate" label = "Fecha estimada de finalizacion" value={updatedProject.endDate} onChange = {(e) =>
+                    setProjectInfo((prev) => ({ ...prev, endDate: e.target.value }))}/>
+            </div>
+            <div className="flex justify-center items-center bg-white space-x-10">  
+
+            <BackButton text={"Cancelar"}/>
+            
+            <input className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
+                dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" 
+                type="submit" value="Aplicar cambios" onClick={handleSubmit}/>  
+            </div>     
+        </div>
+
+  );
+
+}

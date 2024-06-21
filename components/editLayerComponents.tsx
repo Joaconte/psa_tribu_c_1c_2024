@@ -86,14 +86,17 @@ function PreChargedOptionsList({ name, label, onChange }:
 
 function InputDate({name, label, value, onChange}: {name: string, label: string, value: string, onChange: ChangeEventHandler<any>}) {
     
+    /*
     const today = new Date();
     const yesterday = new Date(today.getTime() - (24 * 60 * 60 * 1000));
     const currentDate = yesterday.toISOString().split('T')[0];
 
+    min={currentDate}
+    */
     return (
         <div className="space-y-1">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
-          <input name={name} value= {value} onChange={onChange} type="date" min={currentDate}/>
+          <input name={name} value= {value} onChange={onChange} type="date"/>
         </div>
     )
 }

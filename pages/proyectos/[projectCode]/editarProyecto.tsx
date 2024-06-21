@@ -2,9 +2,21 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 
 import React from "react";
-import { ProjectState } from "@/components/enums";
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { ProjectForm } from '@/components/projectForm';
+
+
+
+const Index = (): JSX.Element => {
+  const navigate = useNavigate();
+  return(
+    <>
+      <button onClick={() => navigate("proyectos")}>proyectos</button>
+      <button onClick={() => navigate(-1)}>go back</button>
+    </>
+  )
+}
+
 
 export default function EditarProyecto() {
 
@@ -16,7 +28,7 @@ export default function EditarProyecto() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`)
         console.log(response)
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -41,14 +53,14 @@ export default function EditarProyecto() {
 
   console.log(project)
   
-  return (
-
-      <div className="mt-8 flex h-full flex-col space-x-0 bg-white">
-        <h1 className="text-4xl mb-5 font-bold ">Modificar proyecto</h1>
-        <div className="container max-w-7xl">
+  return(
+    <div className="mt-8 flex h-full flex-col space-x-0 bg-white">
+      <h1 className="text-4xl mb-5 font-bold ">Actualizar informacion</h1>
+      <div className="container max-w-7xl">
+        <BrowserRouter>
           <ProjectForm project={project}/>
-        </div>     
-      </div>
-    )
+        </BrowserRouter>
+      </div>      
+    </div>
+  )
 }
-
