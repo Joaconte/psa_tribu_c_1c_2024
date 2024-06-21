@@ -2,7 +2,7 @@ import { Project } from "@/types/types";
 import React, { useState } from "react";
 import { ProjectState } from "./enums";
 
-import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
+import { InputDate, InputText, OptionsList, TextArea } from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
 
@@ -11,14 +11,14 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     return enumObj[str as keyof typeof enumObj];
   }
 
-  export const ProjectForm = ({ project }: {project: Project}): JSX.Element => {
+  export const ProjectFormCreation = (): JSX.Element => {
 
     const navigate = useNavigate();
 
-    function modProyect(){
+    function sendProject(){
 
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project.projectCode}`, {
-        method: 'PUT',
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`, {
+        method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -42,16 +42,25 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         });        
     }
 
-    const [ updatedProject, setProjectInfo] = useState<Project>(project);
+    const [updatedProject, setProjectInfo] = useState<Project>({
+      projectCode: "",
+      leaderCode: "",
+      productCode: "",
+      name: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      status: "Iniciado",
+    });
 
     function handleSubmit() {
 
-        if (!project.name)
+        if (!updatedProject.name)
             alert("El proyecto tiene que tener un título");
         else if (updatedProject.startDate && updatedProject.endDate && new Date(updatedProject.startDate) > new Date(updatedProject.endDate))
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
         else{
-            modProyect();
+            sendProject();
             navigate(-1)
         }
     }
@@ -59,29 +68,27 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     return (
 
         <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
-            <InputText name = "name" label = "Título" value={updatedProject.name}  placeholder = "" onChange = {(e) =>
+            <InputText name = "name" label="Título" value ={updatedProject.name} placeholder = "Título" onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
-            <OptionsList name = "status" label = "Estado" value={updatedProject.status} onChange = {(e) =>
-                    setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}/>
+            <OptionsList name="status" label={"Estado"} value={updatedProject.status} onChange={(e) => setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}  />
 
-            <TextArea name = "description" label = "Descripción" value = {updatedProject.description} placeholder = ""  onChange = {(e) =>
+            <TextArea name = "description" label="Descripción" value={updatedProject.description} placeholder = "Descripción"  onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
-            <OptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode} onChange = {(e) =>
-                    setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
+            <OptionsList name="leaderCode" label="Lider" value={updatedProject.leaderCode} onChange={(e) => setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))} />
 
             <div className = "flex bg-white space-x-14" >
                 <InputDate name = "startDate" label = "Fecha de inicio" value={updatedProject.startDate} onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, startDate: e.target.value }))}/>
 
-                <InputDate name = "endDate" label = "Fecha estimada de finalizacion" value={updatedProject.endDate} onChange = {(e) =>
+                <InputDate name = "endDate" label = "Fecha estimada de finalizacion" value={updatedProject.endDate}  onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, endDate: e.target.value }))}/>
             </div>
             <div className="flex justify-center items-center bg-white space-x-10">  
 
                 <BackButton text={"Cancelar"}/>
-                <ApplyButton text={"Aplicar cambios"} onClick={handleSubmit}/>
+                <ApplyButton text= {"Crear nuevo proyecto"} onClick={handleSubmit}/>
             </div>     
         </div>
 

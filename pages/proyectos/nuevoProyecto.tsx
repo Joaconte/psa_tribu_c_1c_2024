@@ -1,12 +1,10 @@
-import RecursoItemSelect from "@/components/recursoItemSelect"
-import { BackButton, CancelButton, ContinueButton } from "@/components/buttons"
-import {InputText, OptionsList, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { Recurso } from "@/types/types";
 
 import { useEffect, useState } from "react"
 import { BrowserRouter, useNavigate } from "react-router-dom";
 import React from "react";
 import { useRouter } from "next/router";
+import { ProjectFormCreation } from "@/components/projectFormCreation";
 
 const Index = (): JSX.Element => {
   const navigate = useNavigate();
@@ -78,7 +76,17 @@ export default function NuevoProyecto() {
       <h1 className="text-4xl mb-5 font-bold ">Nuevo proyecto</h1>
       <div className="container max-w-7xl mx-auto mt-8 space-y-7">
       
-  
+      <BrowserRouter>
+      <ProjectFormCreation/>
+      </BrowserRouter>
+      
+      </div>
+    </div>
+  )
+}
+
+/*
+
       <InputText id = "title" label="Título" placeholder="Ingrese el título"/>
 
       <OptionsList id = "state" label = "Estado" options = {["Iniciado", "Suspendido", "Terminado"]}/>
@@ -107,8 +115,5 @@ export default function NuevoProyecto() {
           <ContinueButton text = "Crear nuevo proyecto" href="/proyectos"/>      
         </div>
 
-      </div>
-    </div>
-  )
-}
+*/
 
