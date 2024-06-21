@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import React from "react";
 import { BrowserRouter, useNavigate } from 'react-router-dom';
-import { ProjectForm } from '@/components/projectForm';
+import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
 
 
 
@@ -44,11 +44,11 @@ export default function EditarProyecto() {
   }, [projectCode]);
 
   if (loading) {
-    return <div>Loading...</div>; // Puedes mostrar un mensaje de carga o spinner aquí si lo deseas
+    return <div>Loading...</div>;
   }
 
   if (!project) {
-    return <div>Error al cargar el proyecto</div>; // Maneja la situación cuando no se puede cargar el proyecto
+    return <div>Error al cargar el proyecto</div>;
   }
 
   console.log(project)
@@ -58,7 +58,7 @@ export default function EditarProyecto() {
       <h1 className="text-4xl mb-5 font-bold ">Actualizar informacion</h1>
       <div className="container max-w-7xl">
         <BrowserRouter>
-          <ProjectForm project={project}/>
+          <ProjectFormEdition project={project}/>
         </BrowserRouter>
       </div>      
     </div>

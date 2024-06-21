@@ -1,19 +1,20 @@
 import { Project } from "@/types/types";
 import React, { useState } from "react";
-import { ProjectState } from "./enums";
 
 import { InputDate, InputText, OptionsList, TextArea } from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
+import { ProjectState } from "../enums";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     return enumObj[str as keyof typeof enumObj];
   }
 
-  export const ProjectFormCreation = (): JSX.Element => {
+  export const ProjectFormCreation = ({ project }: {project: Project}): JSX.Element => {
 
     const navigate = useNavigate();
+    const [updatedProject, setProjectInfo] = useState<Project>(project);
 
     function sendProject(){
 
@@ -36,22 +37,12 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         })
         .then(data => {
             console.log('Project updated successfully:', data);
+            navigate(-1)
         })
         .catch(error => {
             console.error('Error creating project:', error);
         });        
     }
-
-    const [updatedProject, setProjectInfo] = useState<Project>({
-      projectCode: "",
-      leaderCode: "",
-      productCode: "",
-      name: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-      status: "Iniciado",
-    });
 
     function handleSubmit() {
 
@@ -61,7 +52,6 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
         else{
             sendProject();
-            navigate(-1)
         }
     }
 

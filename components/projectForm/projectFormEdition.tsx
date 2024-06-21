@@ -1,21 +1,21 @@
 import { Project } from "@/types/types";
 import React, { useState } from "react";
-import { ProjectState } from "./enums";
 
 import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
+import { ProjectState } from "../enums";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     return enumObj[str as keyof typeof enumObj];
   }
 
-  export const ProjectForm = ({ project }: {project: Project}): JSX.Element => {
+  export const ProjectFormEdition = ({ project }: {project: Project}): JSX.Element => {
 
     const navigate = useNavigate();
 
-    function modProyect(){
+    function send(){
 
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project.projectCode}`, {
         method: 'PUT',
@@ -51,7 +51,7 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         else if (updatedProject.startDate && updatedProject.endDate && new Date(updatedProject.startDate) > new Date(updatedProject.endDate))
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
         else{
-            modProyect();
+            send();
             navigate(-1)
         }
     }
