@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { InputDate, InputText, OptionsList, TextArea } from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
-import { ProjectState } from "../enums";
+import { ProjectState } from "../Utils/enums";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {

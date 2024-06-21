@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
-import { ProjectState } from "../enums";
+import { ProjectState } from "../Utils/enums";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
@@ -36,6 +36,7 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         })
         .then(data => {
             console.log('Project updated successfully:', data);
+            navigate(-1)
         })
         .catch(error => {
             console.error('Error creating project:', error);
@@ -52,7 +53,6 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
         else{
             send();
-            navigate(-1)
         }
     }
 

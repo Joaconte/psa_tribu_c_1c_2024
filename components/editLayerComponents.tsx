@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import { ProjectState, ProjectStateESParse } from './enums';
+import { ProjectState, ProjectStateESP } from './enums';
 
 function InputText({ name, label, value, placeholder, onChange }: 
   {name: string, label: string, value: string, placeholder:string, onChange: ChangeEventHandler<any>}) {
@@ -38,7 +38,7 @@ function OptionsList({ name, label, value, onChange }:
         <select name = {name} onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             {projectStateOptions
             .filter((key) => isNaN(Number(key)))
-            .map((option, index) => (<option value={option}>{ProjectStateESParse[index]}</option>))}
+            .map((option, index) => (<option value={option}>{ProjectStateESP[index]}</option>))}
         </select>
       </div>
     )

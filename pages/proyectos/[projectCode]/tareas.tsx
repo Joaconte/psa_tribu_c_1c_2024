@@ -2,7 +2,12 @@ import { useEffect, useState } from "react"
 import TaskGridRow from "@/components/taskGridRow"
 import { ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
+import { TaskState } from "@/components/Utils/enums"
 
+
+function getEnumValueFromString(enumObj: any, str: string): number | undefined {
+  return enumObj[str as keyof typeof enumObj];
+}
 
 function HeaderItem({ title }: { title: string }) {
   return <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
@@ -37,12 +42,15 @@ export default function Tareas() {
   }, []);
 
 
-  function Column({ estado }: { estado: string }) {
-    return <tr> {list.filter((tarea)=> tarea['status'] === estado)
+  function Column({ estado }: { estado: TaskState }) {
+
+    return <> {list.filter((tarea)=> getEnumValueFromString( TaskState, tarea['status']) === estado)
     .map((tarea) => (
-      <TaskGridRow key={tarea['name']} tarea={tarea} />
+      <tr key={tarea['name']}>
+        <TaskGridRow tarea={tarea} />
+      </tr>
     ))}
-    </tr>
+    </>
   }
 
   return (
@@ -64,10 +72,18 @@ export default function Tareas() {
                     </tr>
                   </thead>
                   <tbody >
-                    <Column estado="NEW"/>
-                    <Column estado="IN_PROGRESS" />
-                    <Column estado="CLOSED" />
-                    <Column estado="BLOCK" />
+                    <td>
+                    <Column estado={TaskState.NEW}/>
+                    </td>
+                    <td>
+                    <Column estado={TaskState.IN_PROGRESS}/>
+                    </td>
+                    <td>
+                    <Column estado={TaskState.CLOSED}/>
+                    </td>
+                    <td>
+                    <Column estado={TaskState.LOCKED}/>
+                    </td>
                   </tbody>
                 </table>
               </div>
