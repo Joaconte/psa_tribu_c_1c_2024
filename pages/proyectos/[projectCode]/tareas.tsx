@@ -22,22 +22,24 @@ export default function Tareas() {
   
   useEffect(() => {
 
-    const fetchProjects = async () => {
+    const fetchProject = async () => {
       
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setList(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-      console.log(projectCode)
-    };
-
-    fetchProjects();
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`)
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(errorInfo => Promise.reject(errorInfo));
+          }
+            return response.json();
+          })
+        .then(data => {
+          console.log('Project created successfully:', data);
+          setList(data);
+        })
+        .catch(error => {
+          console.error('Error creating project:', error);
+        });
+    }
+    fetchProject();
   }, []);
 
 
@@ -45,7 +47,7 @@ export default function Tareas() {
     return <> 
     {list.filter((tarea)=> getEnumValueFromString( TaskState, tarea['status']) === estado)
     .map((tarea) => (
-      <tr key={tarea['name']}>
+      <tr key={tarea['name']} >
         <TaskGridCell tarea={tarea} />
       </tr>
     ))}
@@ -54,9 +56,15 @@ export default function Tareas() {
 
   function Column({ estado }: { estado: TaskState }) {
     return (
-      <td className="align-top border ">
-        <TasksPerColumn estado={estado}/>
-      </td>
+
+      <table className="min-w-ful">
+        <thead >
+            <HeaderItem title = {TaskState[estado]} />
+        </thead>
+        <tbody className="min-w-full border">
+          <TasksPerColumn estado={estado}/>
+        </tbody>
+      </table>
       )
   }
 
@@ -68,23 +76,13 @@ export default function Tareas() {
         </div>
           <div className="flex">
             <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ">
-              <div className="inline-block min-w-full overflow-scroll overflow-x-hidden	align-middle border-b border-gray-200 shadow sm:rounded-lg  ">
-                <table className="min-w-full">
-                  <thead>
-                    <tr>
-                      <HeaderItem title="NUEVAS" />
-                      <HeaderItem title="EN PROGRESO" />
-                      <HeaderItem title="CERADAS" />
-                      <HeaderItem title="BLOQUEADAS" />
-                    </tr>
-                  </thead>
-                  <tbody >
-                    <Column estado={TaskState.NEW}/>
-                    <Column estado={TaskState.IN_PROGRESS}/>
-                    <Column estado={TaskState.CLOSED}/>
-                    <Column estado={TaskState.LOCKED}/>
-                  </tbody>
-                </table>
+              <div className="grid grid-cols-4 inline-block min-w-full overflow-scroll overflow-x-hidden border-b border-gray-200 shadow sm:rounded-lg  ">
+          
+                <Column estado={TaskState.NEW}/>
+                <Column estado={TaskState.IN_PROGRESS}/>
+                <Column estado={TaskState.CLOSED}/>
+                <Column estado={TaskState.LOCKED}/>
+
               </div>
               <div>
               <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
@@ -95,3 +93,24 @@ export default function Tareas() {
     </>
   )
 }
+
+/*
+
+                <table className="min-w-full">
+                  <thead>
+                    <tr>
+                      <HeaderItem title="NUEVAS" />
+                      <HeaderItem title="EN PROGRESO" />
+                      <HeaderItem title="CERADAS" />
+                      <HeaderItem title="BLOQUEADAS" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <Column estado={TaskState.NEW}/>
+                    <Column estado={TaskState.IN_PROGRESS}/>
+                    <Column estado={TaskState.CLOSED}/>
+                    <Column estado={TaskState.LOCKED}/>
+                  </tbody>
+                </table>
+
+*/

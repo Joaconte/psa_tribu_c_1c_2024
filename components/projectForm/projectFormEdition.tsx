@@ -16,7 +16,6 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     const navigate = useNavigate();
     const [ updatedProject, setProjectInfo] = useState<Project>(project);
 
-
     function send(){
 
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${project.projectCode}`, {

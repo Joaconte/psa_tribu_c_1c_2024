@@ -89,7 +89,7 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
             <div className="flex justify-center items-center bg-white space-x-10">  
 
                 <BackButton text={"Cancelar"}/>
-                <ApplyButton text={"Aplicar cambios"} onClick={handleSubmit}/>
+                <ApplyButton text={"Crear nueva tarea"} onClick={handleSubmit}/>
             </div>     
         </div>
 
