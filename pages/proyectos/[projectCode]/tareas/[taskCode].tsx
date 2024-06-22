@@ -32,12 +32,18 @@ export default function Task() {
         }
         const data = await response.json();
         setTask(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
     fetchTask();
   }, []);
+  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
       <TaskLayer task = {task}/>
