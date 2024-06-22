@@ -1,7 +1,7 @@
-import { Project } from "@/types/types"
 import { DeleteButton, ContinueCodeProjectButton, BackButton } from "./buttons"
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import { Project } from "@/utils/types";
 
 function Label({text, value}: {text: string, value: string}){
     return(

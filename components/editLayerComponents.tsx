@@ -1,5 +1,4 @@
 import React, { ChangeEventHandler } from 'react';
-import { ProjectState, ProjectStateESP } from './enums';
 
 function InputText({ name, label, value, placeholder, onChange }: 
   {name: string, label: string, value: string, placeholder:string, onChange: ChangeEventHandler<any>}) {
@@ -27,18 +26,21 @@ function InputText({ name, label, value, placeholder, onChange }:
   )
 }
 
+interface EnumType {
+  [key: string]: string | number;
+}
 
-function OptionsList({ name, label, value, onChange }: 
-  {name: string, label: string, value: string, onChange: ChangeEventHandler<any>}) {
+function OptionsList({ name, label, value, onChange, options, optionsESP }: 
+  {name: string, label: string, value: string, onChange: ChangeEventHandler<any>, options: EnumType, optionsESP: EnumType}) {
 
-    const projectStateOptions = Object.values(ProjectState);
+    const projectStateOptions = Object.values(options);
     return (
         <div className="space-y-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
         <select name = {name} onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             {projectStateOptions
             .filter((key) => isNaN(Number(key)))
-            .map((option, index) => (<option value={option}>{ProjectStateESP[index]}</option>))}
+            .map((option, index) => (<option value={option}>{optionsESP[index]}</option>))}
         </select>
       </div>
     )

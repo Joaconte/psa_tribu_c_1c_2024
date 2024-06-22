@@ -1,14 +1,12 @@
-import { Project, Recurso } from "@/types/types";
-
 import { useEffect, useState } from "react"
 import { BrowserRouter } from "react-router-dom";
 import React from "react";
-import { useRouter } from "next/router";
 import { ProjectFormCreation } from "@/components/projectForm/projectFormCreation";
 import { BackButton } from "@/components/buttons";
+import { Project, Recurso } from "@/utils/types";
 
 export default function NuevoProyecto() {
-
+  
   const [resources, setResources] = useState<Recurso[]>([]);
   
   const [project] = useState<Project>({
@@ -22,10 +20,7 @@ export default function NuevoProyecto() {
     status: "Iniciado",
   });
 
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
-  var projectCode = router.query.projectCode;
-
 
   useEffect(() => {
     const waitUntilLoad = async () => {
@@ -48,7 +43,6 @@ export default function NuevoProyecto() {
   }
 
   return (
-
 
     <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
       <h1 className="text-4xl mb-5 font-bold ">Nuevo proyecto</h1>

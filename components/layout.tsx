@@ -1,5 +1,5 @@
 import SideBarItem from "./SidebarItem"
-import { ISidebarItem } from "./types"
+import { ISidebarItem } from "../utils/types"
 
 export default function Layout({ children }: { children: any }) {
   const menuItems: ISidebarItem[] = [

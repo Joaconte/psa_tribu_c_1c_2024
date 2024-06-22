@@ -2,51 +2,50 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 
 import React from "react";
-import { BrowserRouter, useNavigate } from 'react-router-dom';
-import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
+import { BrowserRouter } from 'react-router-dom';
+import { TaskFormEdition } from '@/components/taskForm/taskFormEdition';
 
 
-export default function EditarProyecto() {
+export default function EditarTarea() {
 
   const router = useRouter();
-  const [project, setproject] = useState();  
+  const [task, setTask] = useState();  
   const [loading, setLoading] = useState(true);
-  var projectCode = router.query.projectCode;
+  var taskCode = router.query.taskCode;
 
   useEffect(() => {
-    const fetchProject = async () => {
+    const fetchTask = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`)
         console.log(response)
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setproject(data);
+        setTask(data);
         setLoading(false); 
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error("Error fetching task:", error);
       }
     };
-    fetchProject();
-  }, [projectCode]);
+    fetchTask();
+  }, [taskCode]);
 
+  
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!project) {
-    return <div>Error al cargar el proyecto</div>;
+  if (!task) {
+    return <div>Error al cargar la tarea</div>;
   }
-
-  console.log(project)
   
   return(
     <div className="mt-8 flex h-full flex-col space-x-0 bg-white">
       <h1 className="text-4xl mb-5 font-bold ">Actualizar informacion</h1>
       <div className="container max-w-7xl">
         <BrowserRouter>
-          <ProjectFormEdition project={project}/>
+          <TaskFormEdition task={task}/>
         </BrowserRouter>
       </div>      
     </div>

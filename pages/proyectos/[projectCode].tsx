@@ -1,10 +1,7 @@
 import ProyectLayer from "@/components/projectLayer";
-import { Inter } from "next/font/google"
-const inter = Inter({ subsets: ["latin"] })
+import { Project } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
-
-import { Project } from "@/types/types";
 
 
 export default function Proyecto() {

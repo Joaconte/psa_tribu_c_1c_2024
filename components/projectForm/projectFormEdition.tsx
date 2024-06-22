@@ -1,10 +1,10 @@
-import { Project } from "@/types/types";
 import React, { useState } from "react";
 
 import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
-import { ProjectState } from "../Utils/enums";
+import { ProjectState, ProjectStateESP } from "../../utils/enums";
+import { Project } from "@/utils/types";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
@@ -14,6 +14,8 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
   export const ProjectFormEdition = ({ project }: {project: Project}): JSX.Element => {
 
     const navigate = useNavigate();
+    const [ updatedProject, setProjectInfo] = useState<Project>(project);
+
 
     function send(){
 
@@ -43,8 +45,6 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         });        
     }
 
-    const [ updatedProject, setProjectInfo] = useState<Project>(project);
-
     function handleSubmit() {
 
         if (!project.name)
@@ -57,19 +57,20 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
     }
 
     return (
-
         <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
             <InputText name = "name" label = "Título" value={updatedProject.name}  placeholder = "" onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
-            <OptionsList name = "status" label = "Estado" value={updatedProject.status} onChange = {(e) =>
-                    setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}/>
+            <OptionsList name = "status" label = "Estado" value={updatedProject.status} 
+            options = {ProjectState}  optionsESP = {ProjectStateESP}
+            onChange = {(e) => setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}/>
 
             <TextArea name = "description" label = "Descripción" value = {updatedProject.description} placeholder = ""  onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
-            <OptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode} onChange = {(e) =>
-                    setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
+            <OptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode} 
+            options = {ProjectState}  optionsESP = {ProjectStateESP}
+            onChange = {(e) => setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
 
             <div className = "flex bg-white space-x-14" >
                 <InputDate name = "startDate" label = "Fecha de inicio" value={updatedProject.startDate} onChange = {(e) =>

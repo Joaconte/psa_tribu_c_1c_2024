@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import TaskGridRow from "@/components/taskGridRow"
+import TaskGridCell from "@/components/taskGridCell"
 import { ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
-import { TaskState } from "@/components/Utils/enums"
+import { TaskState } from "@/utils/enums"
+import Link from "next/link";
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
@@ -18,12 +19,10 @@ export default function Tareas() {
   const router = useRouter();
   const [list, setList] = useState([])
   var projectCode = router.query.projectCode;
-
+  
   useEffect(() => {
 
     const fetchProjects = async () => {
-
-      projectCode = router.query.projectCode;
       
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`);
@@ -42,15 +41,23 @@ export default function Tareas() {
   }, []);
 
 
-  function Column({ estado }: { estado: TaskState }) {
-
-    return <> {list.filter((tarea)=> getEnumValueFromString( TaskState, tarea['status']) === estado)
+  function TasksPerColumn({ estado }: { estado: TaskState }){
+    return <> 
+    {list.filter((tarea)=> getEnumValueFromString( TaskState, tarea['status']) === estado)
     .map((tarea) => (
       <tr key={tarea['name']}>
-        <TaskGridRow tarea={tarea} />
+        <TaskGridCell tarea={tarea} />
       </tr>
     ))}
     </>
+  }
+
+  function Column({ estado }: { estado: TaskState }) {
+    return (
+      <td className="align-top border ">
+        <TasksPerColumn estado={estado}/>
+      </td>
+      )
   }
 
   return (
@@ -60,9 +67,9 @@ export default function Tareas() {
           <h1 className="text-3xl font-bold decoration-gray-400">Tareas</h1>
         </div>
           <div className="flex">
-            <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8  ">
-              <div className="inline-block min-w-full overflow-scroll overflow-x-hidden	align-middle border-b border-gray-200 shadow sm:rounded-lg ">
-                <table className="min-w-full ">
+            <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ">
+              <div className="inline-block min-w-full overflow-scroll overflow-x-hidden	align-middle border-b border-gray-200 shadow sm:rounded-lg  ">
+                <table className="min-w-full">
                   <thead>
                     <tr>
                       <HeaderItem title="NUEVAS" />
@@ -72,23 +79,15 @@ export default function Tareas() {
                     </tr>
                   </thead>
                   <tbody >
-                    <td>
                     <Column estado={TaskState.NEW}/>
-                    </td>
-                    <td>
                     <Column estado={TaskState.IN_PROGRESS}/>
-                    </td>
-                    <td>
                     <Column estado={TaskState.CLOSED}/>
-                    </td>
-                    <td>
                     <Column estado={TaskState.LOCKED}/>
-                    </td>
                   </tbody>
                 </table>
               </div>
               <div>
-                <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
+              <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
               </div>
             </div>
           </div>

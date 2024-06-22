@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { DeleteButton } from "./buttons"
+import { BrowserRouter } from "react-router-dom"
+import { BackButton, ContinueCodeProjectAndTaskButton } from "./buttons"
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -29,14 +30,10 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Fecha de inicio:" value={task['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={task['endDate']}/>
                 <div className="flex justify-center items-center bg-white space-x-10"> 
-                    <DeleteButton/>     
-                    <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-                        focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 
-                        dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        href={{
-                            pathname: `/proyectos/${encodeURIComponent(task['projectCode'])}/tareas/${encodeURIComponent(task['taskCode'])}`,
-                            query: `${(task['taskCode'])}`
-                        }}>Actualizar datos</Link>  
+                <BrowserRouter>
+                  <BackButton text = "Volver"/>
+                </BrowserRouter>
+                <ContinueCodeProjectAndTaskButton text="Actualizar datos" taskCode={task["taskCode"]} projectCode={task['projectCode']} path={"/editarTarea"}/>
                 </div>
             </div>  
         </div>  
