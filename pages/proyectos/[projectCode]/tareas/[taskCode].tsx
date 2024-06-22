@@ -8,26 +8,18 @@ export default function Task() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
   
-    const [task, setTask] = useState<Task>({
-      taskCode: "null",
-      projectCode: "null",
-      name: "null",
-      status: "null",
-      description: "null",
-      employeeCode: "null",
-      startDate: "null",
-      endDate: "null",
-      priority: "null",
-    });
+    const [task, setTask] = useState<Task | null>(null); 
 
 
   useEffect(() => {
    
     const fetchTask = async () => {
-      
-      var taskCode = router.query.taskCode;
 
       try {
+        var taskCode = router.query.taskCode;
+        if (!taskCode) {
+          throw new Error("Task code is undefined or null");
+      }
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
