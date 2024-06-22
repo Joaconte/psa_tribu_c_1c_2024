@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import TaskGridCell from "@/components/taskGridCell"
 import { ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
@@ -11,36 +11,46 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
 }
 
 function HeaderItem({ title }: { title: string }) {
-  return <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
+  return <tr>
+          <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
+        </tr>
 }
 
 export default function Tareas() {
 
   const router = useRouter();
-  const [list, setList] = useState([])
-  var projectCode = router.query.projectCode;
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const projectCode = router.query.projectCode;
   
   useEffect(() => {
 
-    const fetchProject = async () => {
-      
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`)
-        .then(response => {
-          if (!response.ok) {
-            return response.json().then(errorInfo => Promise.reject(errorInfo));
-          }
-            return response.json();
-          })
-        .then(data => {
-          console.log('Project created successfully:', data);
-          setList(data);
-        })
-        .catch(error => {
-          console.error('Error creating project:', error);
-        });
+    const fetchTasks = async () => {
+
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setList(data);
+        setLoading(false); 
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
     }
-    fetchProject();
-  }, []);
+    fetchTasks();
+  }, [router.query.projectCode]);
+    
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!list) {
+    return <div>Error al cargar las tareas</div>; 
+  }
+
 
 
   function TasksPerColumn({ estado }: { estado: TaskState }){
@@ -58,8 +68,8 @@ export default function Tareas() {
     return (
 
       <table className="min-w-ful">
-        <thead >
-            <HeaderItem title = {TaskState[estado]} />
+        <thead>
+          <HeaderItem title = {TaskState[estado]} />
         </thead>
         <tbody className="min-w-full border">
           <TasksPerColumn estado={estado}/>
@@ -92,6 +102,7 @@ export default function Tareas() {
       </div>
     </>
   )
+  
 }
 
 /*

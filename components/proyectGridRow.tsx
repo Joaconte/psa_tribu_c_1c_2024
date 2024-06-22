@@ -34,7 +34,7 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
         <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
               href={{
                   pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}/tareas`,
-                  query: { projectCode: proyecto['projectCode'] }
+                  query: `${(proyecto['projectCode'])}`
               }}>ver</Link>
       </td>
     </tr>
