@@ -23,7 +23,11 @@ export default function Task() {
   var taskCode = router.query.taskCode;
 
   useEffect(() => {
+   
+    if (typeof window !== 'undefined') {
+
     const fetchTask = async () => {
+
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
         if (!response.ok) {
@@ -37,7 +41,9 @@ export default function Task() {
       }
     };
     fetchTask();
+  }
   }, [taskCode]);
+
   
   if (loading) {
     return <div>Loading...</div>;

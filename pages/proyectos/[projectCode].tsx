@@ -22,7 +22,6 @@ export default function Proyecto() {
 
   useEffect(() => {
     const fetchProject = async () => {
-      projectCode = router.query.projectCode;
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`);
         if (!response.ok) {
