@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { BrowserRouter } from 'react-router-dom';
 import { TaskFormEdition } from '@/components/taskForm/taskFormEdition';
+import LoadingScreen from "@/components/loadingScreen"
 
 
 export default function EditarTarea() {
@@ -31,9 +32,8 @@ export default function EditarTarea() {
     fetchTask();
   }, [taskCode]);
 
-  
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
 
   if (!task) {

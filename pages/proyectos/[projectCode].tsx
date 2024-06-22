@@ -1,22 +1,15 @@
 import ProyectLayer from "@/components/projectLayer";
-import { Project } from "@/utils/types";
+import { Project, Resource } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/loadingScreen"
 
 
 export default function Proyecto() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [project, setproject] = useState<Project>({
-    projectCode: "null",
-    leaderCode: "null",
-    productCode: "null",
-    name: "null",
-    startDate: "null",
-    endDate: "null",
-    description: "null",
-    status: "null",
-  });
+  const [project, setproject] = useState<Project | null>(null);
+  const [resources, setResources] = useState([])
 
   var projectCode = router.query.projectCode;
 
@@ -34,13 +27,14 @@ export default function Proyecto() {
         console.error("Error fetching projects:", error);
       }
     };
+
     fetchProject();
+    console.log(resources)
 
   }, [projectCode]);
 
-
   if (loading) {
-    return <div>Loading...</div>; // Puedes mostrar un mensaje de carga o spinner aquí si lo deseas
+    return <LoadingScreen/>
   }
 
   if (!project) {

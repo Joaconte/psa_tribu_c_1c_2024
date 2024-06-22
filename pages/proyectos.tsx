@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ProyectGridRow from "@/components/proyectGridRow"
 import { ContinueButton } from "@/components/buttons"
+import LoadingScreen from "@/components/loadingScreen"
 
 
 function HeaderItem({ title }: { title: string }) {
@@ -29,7 +30,7 @@ export default function Proyectos() {
   }, []);
   
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
 
   if (!list) {
@@ -64,7 +65,7 @@ export default function Proyectos() {
                   </tbody>
                 </table>                
               </div>
-              <div>
+              <div className="space-x-10"> 
                 <ContinueButton text = "Nuevo proyecto" href="/proyectos/nuevoProyecto"/> 
               </div>
             </div>

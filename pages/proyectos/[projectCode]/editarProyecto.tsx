@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
+import LoadingScreen from "@/components/loadingScreen"
 
 
 export default function EditarProyecto() {
@@ -32,7 +33,7 @@ export default function EditarProyecto() {
   }, [projectCode]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
 
   if (!project) {

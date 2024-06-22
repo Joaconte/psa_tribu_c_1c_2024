@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import TaskGridCell from "@/components/taskGridCell"
-import { ContinueCodeProjectButton } from "@/components/buttons"
+import { BackButton, ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
 import { TaskState } from "@/utils/enums"
-import Link from "next/link";
+import LoadingScreen from "@/components/loadingScreen"
+import { BrowserRouter } from "react-router-dom"
 
 
 function getEnumValueFromString(enumObj: any, str: string): number | undefined {
@@ -44,7 +45,7 @@ export default function Tareas() {
   }, [projectCode]);
     
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
 
   if (!list) {
@@ -94,8 +95,11 @@ export default function Tareas() {
                 <Column estado={TaskState.LOCKED}/>
 
               </div>
-              <div>
-              <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
+              <div className="flex justify-center items-center bg-white space-x-10"> 
+                <BrowserRouter>
+                  <BackButton text = "Volver"/>
+                </BrowserRouter>
+                <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
               </div>
             </div>
           </div>

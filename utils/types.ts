@@ -1,4 +1,4 @@
-export interface Recurso {
+export interface Resource {
   legajo: string;
   nombre: string;
   apellido: string;

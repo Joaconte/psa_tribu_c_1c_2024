@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { Task } from "@/utils/types";
 import { useRouter } from "next/router";
 import { BackButton } from "@/components/buttons";
+import LoadingScreen from "@/components/loadingScreen"
 
 export default function NuevaTarea() {
 
@@ -41,7 +42,7 @@ export default function NuevaTarea() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
 
   return (

@@ -2,24 +2,22 @@ import TaskLayer from "@/components/taskLayer";
 import { Task } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/loadingScreen"
 
 export default function Task() {
 
     const router = useRouter();
     const [loading, setLoading] = useState(true);
   
-    const [task, setTask] = useState<Task | null>(null); 
+    const [task, setTask] = useState<Task | null>(null);
 
+    var taskCode = router.query.taskCode;
 
   useEffect(() => {
    
     const fetchTask = async () => {
 
       try {
-        var taskCode = router.query.taskCode;
-        if (!taskCode) {
-          throw new Error("Task code is undefined or null");
-      }
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -32,11 +30,10 @@ export default function Task() {
       }
     };
     fetchTask();
-  }, [router.query.taskCode]);
-
+  }, [taskCode]);
   
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen/>
   }
   return (
       <TaskLayer task = {task}/>
