@@ -20,13 +20,12 @@ export default function Task() {
       priority: "null",
     });
 
-  var taskCode = router.query.taskCode;
 
   useEffect(() => {
    
-    if (typeof window !== 'undefined') {
-
     const fetchTask = async () => {
+      
+      var taskCode = router.query.taskCode;
 
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
@@ -41,8 +40,7 @@ export default function Task() {
       }
     };
     fetchTask();
-  }
-  }, [taskCode]);
+  }, [router.query.taskCode]);
 
   
   if (loading) {
