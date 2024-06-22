@@ -41,7 +41,7 @@ export default function Tareas() {
       }
     }
     fetchTasks();
-  }, [router.query.projectCode]);
+  }, [projectCode]);
     
   if (loading) {
     return <div>Loading...</div>;

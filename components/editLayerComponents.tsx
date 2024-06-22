@@ -51,7 +51,7 @@ function InputDate({name, label, value, onChange}:
     return (
         <div className="space-y-1">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label>
-          <input name={name} value= {value} onChange={onChange} type="date"/>
+          <input name={name} value={value ?? ''} onChange={onChange} type="date"/>
         </div>
     )
 }

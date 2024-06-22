@@ -37,7 +37,7 @@ export default function Proyecto() {
     };
     fetchProject();
 
-  }, []);
+  }, [projectCode]);
 
 
   if (loading) {

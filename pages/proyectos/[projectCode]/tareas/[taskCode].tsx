@@ -24,7 +24,6 @@ export default function Task() {
 
   useEffect(() => {
     const fetchTask = async () => {
-      taskCode = router.query.taskCode;
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
         if (!response.ok) {
@@ -34,17 +33,15 @@ export default function Task() {
         setTask(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        console.error("Error fetching task:", error);
       }
     };
     fetchTask();
-  }, []);
+  }, [taskCode]);
   
   if (loading) {
     return <div>Loading...</div>;
   }
-
-
   return (
       <TaskLayer task = {task}/>
   )
