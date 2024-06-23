@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import TaskGridCell from "@/components/taskGridCell"
-import { BackButton, ContinueButton, ContinueCodeProjectButton } from "@/components/buttons"
+import { BackButton, ContinueButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
 import { ProjectStatus, TaskStatus } from "@/utils/enums"
 import LoadingScreen from "@/components/loadingScreen"
