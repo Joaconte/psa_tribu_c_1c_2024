@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import TaskGridCell from "@/components/taskGridCell"
-import { BackButton, ContinueCodeProjectButton } from "@/components/buttons"
+import { BackButton, ContinueButton, ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
 import { ProjectStatus, TaskStatus } from "@/utils/enums"
 import LoadingScreen from "@/components/loadingScreen"
@@ -63,7 +63,7 @@ export default function Tareas() {
   
     function NewTaskButton({ projectStatus, projectCode }: { projectStatus: any, projectCode: any }){
     if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
-      return <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"}/>
+      return <ContinueButton text="Nueva tarea" href = {`/proyectos/${projectCode}/tareas/nuevaTarea`}/>
     }
       return null;
     }

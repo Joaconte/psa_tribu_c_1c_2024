@@ -31,14 +31,16 @@ function Label({text, value}: {text: string, value: string}){
 
     const url = `/projects/${project['projectCode']}`
 
+    
+    //<Label text="productCode:" value={project['productCode']}/>
+
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
             <H1 value={project['name']}/>
             <div className="container max-w-7xl mx-auto mt-8 space-y-7">
                 <Label text="Código:" value={project['projectCode']}/>
                 <Label text="Estado:" value={projectStatus}/>
-                <Label text="leaderCode:" value={projectLeader}/>
-                <Label text="productCode:" value={project['productCode']}/>
+                <Label text="Lider:" value={projectLeader}/>
                 <Label text="Descripción:" value={project['description']}/>
                 <Label text="Fecha de inicio:" value={project['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={project['endDate']}/>
