@@ -6,7 +6,7 @@ export default function TaskGridCell({ tarea }: {tarea: any}) {
         <Link className="flex items-cente font-medium  hover:underline "
         href={{
             pathname: `/proyectos/${tarea['projectCode']}/tareas/${tarea['taskCode']}`,
-            query: `${tarea['projectCode']}`
+            query: `taskCode=${tarea['taskCode']}`
         }}>{tarea['name']}</Link> 
       </td>
   )

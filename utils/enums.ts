@@ -1,36 +1,36 @@
-export enum ProjectState {
-    INICIATED,
+export enum ProjectStatus {
+    INITIATED,
     SUSPENDED,
     FINISHED
   }
   
-export enum ProjectStateESP{
+export enum ProjectStatusESP{
     "Iniciado", 
     "Suspendido", 
     "Terminado"
   }
 
-  export enum TaskState {
+  export enum TaskStatus {
     NEW,
     IN_PROGRESS,
     CLOSED,
     LOCKED
   }
 
-  export enum TaskStateESP {
+  export enum TaskStatusESP {
     "Nueva",
     "En progreso",
     "Cerrada",
     "Bloqueada"
   }
   
-  export enum Priority {
+  export enum TaskPriority {
     LOW,
     MID,
     HIGH
   }
 
-  export enum PriorityESP {
+  export enum TaskPriorityESP {
     "Baja",
     "Medio",
     "Alta"

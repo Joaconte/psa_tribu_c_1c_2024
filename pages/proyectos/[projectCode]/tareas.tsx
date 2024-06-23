@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import TaskGridCell from "@/components/taskGridCell"
 import { BackButton, ContinueCodeProjectButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
-import { TaskState } from "@/utils/enums"
+import { ProjectStatus, TaskStatus } from "@/utils/enums"
 import LoadingScreen from "@/components/loadingScreen"
 import { BrowserRouter } from "react-router-dom"
+import { getEnumValueFromString, parseTaskStatusToESP } from "@/utils/enumFunctions"
 
 
-function getEnumValueFromString(enumObj: any, str: string): number | undefined {
-  return enumObj[str as keyof typeof enumObj];
-}
+
+
 
 function HeaderItem({ title }: { title: string }) {
   return <tr>
@@ -24,6 +24,7 @@ export default function Tareas() {
   const [loading, setLoading] = useState(true);
 
   const projectCode = router.query.projectCode;
+  const projectStatus = router.query.projectStatus;
   
   useEffect(() => {
 
@@ -42,7 +43,7 @@ export default function Tareas() {
       }
     }
     fetchTasks();
-  }, [projectCode]);
+  }, [projectCode, projectStatus]);
     
   if (loading) {
     return <LoadingScreen/>
@@ -54,29 +55,38 @@ export default function Tareas() {
 
 
 
-  function TasksPerColumn({ estado }: { estado: TaskState }){
+  function TasksPerColumn({ estado }: { estado: TaskStatus }){
     return <> 
-    {list.filter((tarea)=> getEnumValueFromString( TaskState, tarea['status']) === estado)
+    {list.filter((tarea)=> getEnumValueFromString( TaskStatus, tarea['status']) == estado)
     .map((tarea) => (
-      <tr key={tarea['name']} >
+      <tr key={tarea['taskCode']} >
         <TaskGridCell tarea={tarea} />
       </tr>
     ))}
     </>
   }
 
-  function Column({ estado }: { estado: TaskState }) {
+  
+    function NewTaskButton({ projectStatus, projectCode }: { projectStatus: any, projectCode: any }){
+    if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
+      return <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"}/>
+    }
+      return null;
+    }
+
+  function Column({ estado }: { estado: TaskStatus }) {
     return (
 
       <table className="min-w-ful">
         <thead>
-          <HeaderItem title = {TaskState[estado]} />
+          <HeaderItem title = {parseTaskStatusToESP(TaskStatus[estado]).toUpperCase()} />
         </thead>
         <tbody className="min-w-full border">
           <TasksPerColumn estado={estado}/>
         </tbody>
       </table>
       )
+      
   }
 
   return (
@@ -89,17 +99,17 @@ export default function Tareas() {
             <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ">
               <div className="grid grid-cols-4 inline-block min-w-full overflow-scroll overflow-x-hidden border-b border-gray-200 shadow sm:rounded-lg  ">
           
-                <Column estado={TaskState.NEW}/>
-                <Column estado={TaskState.IN_PROGRESS}/>
-                <Column estado={TaskState.CLOSED}/>
-                <Column estado={TaskState.LOCKED}/>
+                <Column estado={TaskStatus.NEW}/>
+                <Column estado={TaskStatus.IN_PROGRESS}/>
+                <Column estado={TaskStatus.CLOSED}/>
+                <Column estado={TaskStatus.LOCKED}/>
 
               </div>
               <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
                 </BrowserRouter>
-                <ContinueCodeProjectButton text="Nueva tarea" projectCode={projectCode} path={"/tareas/nuevaTarea"} />
+                <NewTaskButton projectStatus={projectStatus} projectCode={projectCode} />
               </div>
             </div>
           </div>

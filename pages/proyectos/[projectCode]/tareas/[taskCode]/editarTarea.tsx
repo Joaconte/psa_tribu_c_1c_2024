@@ -13,6 +13,7 @@ export default function EditarTarea() {
   const [task, setTask] = useState();  
   const [loading, setLoading] = useState(true);
   var taskCode = router.query.taskCode;
+  console.log("1", taskCode)
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -40,6 +41,7 @@ export default function EditarTarea() {
     return <div>Error al cargar la tarea</div>;
   }
   
+  console.log("2", taskCode)
   return(
     <div className="mt-8 flex h-full flex-col space-x-0 bg-white">
       <h1 className="text-4xl mb-5 font-bold ">Actualizar informacion</h1>

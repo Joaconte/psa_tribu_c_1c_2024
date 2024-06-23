@@ -1,3 +1,4 @@
+import { parseProjectStatusToESP } from "@/utils/enumFunctions"
 import Link from "next/link"
 
 function CommonItem({text}: {text: any}){
@@ -19,7 +20,6 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
         <Link  className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
           href={{
             pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}`,
-            query: `${(proyecto['projectCode'])}`
           }}
         >{proyecto['name']}
         </Link>
@@ -28,13 +28,13 @@ export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
       <CommonItem text={proyecto['leaderCode']}/>
       <CommonItem text={proyecto['startDate']}/>
       <CommonItem text={proyecto['endDate']}/>
-      <CommonItem text={proyecto['status']}/>
+      <CommonItem text={parseProjectStatusToESP(proyecto['status'])}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
               href={{
                   pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}/tareas`,
-                  query: `${(proyecto['projectCode'])}`
+                  query : `projectStatus=${proyecto['status']}`
               }}>ver</Link>
       </td>
     </tr>

@@ -2,6 +2,7 @@ import { DeleteButton, ContinueCodeProjectButton, BackButton } from "./buttons"
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Project } from "@/utils/types";
+import { parseProjectStatusToESP } from "@/utils/enumFunctions";
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -19,12 +20,14 @@ function Label({text, value}: {text: string, value: string}){
   
   export default function ProyectLayer({ project }: {project: Project}) {
   
+    const projectStatus = parseProjectStatusToESP(project['status'])
+
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
             <H1 value={project['name']}/>
             <div className="container max-w-7xl mx-auto mt-8 space-y-7">
                 <Label text="Código:" value={project['projectCode']}/>
-                <Label text="Estado:" value={project['status']}/>
+                <Label text="Estado:" value={projectStatus}/>
                 <Label text="leaderCode:" value={project['leaderCode']}/>
                 <Label text="productCode:" value={project['productCode']}/>
                 <Label text="Descripción:" value={project['description']}/>

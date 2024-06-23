@@ -3,13 +3,10 @@ import React, { useState } from "react";
 import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
-import { ProjectState, ProjectStateESP } from "../../utils/enums";
+import { ProjectStatus, ProjectStatusESP } from "../../utils/enums";
 import { Project } from "@/utils/types";
+import { getEnumValueFromString } from "@/utils/enumFunctions";
 
-
-function getEnumValueFromString(enumObj: any, str: string): number | undefined {
-    return enumObj[str as keyof typeof enumObj];
-  }
 
   export const ProjectFormEdition = ({ project }: {project: Project}): JSX.Element => {
 
@@ -27,7 +24,7 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         body: JSON.stringify({
             ...updatedProject,
             leaderCode: parseInt(updatedProject.leaderCode),
-            status: getEnumValueFromString(ProjectState, updatedProject.status),
+            status: getEnumValueFromString(ProjectStatus, updatedProject.status),
         })
         }).then(response => {
         if (!response.ok) {
@@ -61,14 +58,14 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
                     setProjectInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
             <OptionsList name = "status" label = "Estado" value={updatedProject.status} 
-            options = {ProjectState}  optionsESP = {ProjectStateESP}
+            options = {ProjectStatus}  optionsESP = {ProjectStatusESP}
             onChange = {(e) => setProjectInfo((prev) => ({ ...prev, status: e.target.value }))}/>
 
             <TextArea name = "description" label = "Descripción" value = {updatedProject.description} placeholder = ""  onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
             <OptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode} 
-            options = {ProjectState}  optionsESP = {ProjectStateESP}
+            options = {ProjectStatus}  optionsESP = {ProjectStatusESP}
             onChange = {(e) => setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
 
             <div className = "flex bg-white space-x-14" >

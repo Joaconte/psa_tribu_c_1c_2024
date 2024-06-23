@@ -1,3 +1,4 @@
+import { parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
 import Link from "next/link"
 import { BrowserRouter } from "react-router-dom"
 import { BackButton, ContinueCodeProjectAndTaskButton } from "./buttons"
@@ -17,14 +18,19 @@ function Label({text, value}: {text: string, value: string}){
   }
   
   export default function TaskLayer({ task }: {task: any}) {
-  
+
+    const taskStatus = parseTaskStatusToESP(task['status'])
+    console.log(task['priority'])
+    const taskPriority = parseTaskPriorityToESP(task['priority'])
+
+
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
             <H1 value={task['name']}/>
             <div className="container max-w-7xl mx-auto mt-8 space-y-7">
                 <Label text="Código:" value={task['taskCode']}/>
-                <Label text="Estado:" value={task['status']}/>
-                <Label text="Prioridad:" value={task['priority']}/>
+                <Label text="Estado:" value={taskStatus}/>
+                <Label text="Prioridad:" value={taskPriority}/>
                 <Label text="employeeCode:" value={task['employeeCode']}/>
                 <Label text="Descripción:" value={task['description']}/>
                 <Label text="Fecha de inicio:" value={task['startDate']}/>

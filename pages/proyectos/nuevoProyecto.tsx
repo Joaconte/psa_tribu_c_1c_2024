@@ -23,30 +23,19 @@ export default function NuevoProyecto() {
   const [resources, setResources] = useState<Resource[]>([]);
 
   useEffect(() => {
-
-    const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos"
-
-    const fetchResource = async () => {
-
-        const response = await fetch(`${url}`)    
-        .then(response => {
-          console.log("Response: ", response)
-          if (!response.ok) {
-            return response.json().then(errorInfo => Promise.reject(errorInfo));
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('Project created successfully:', data);
-          setResources(data);
-          setLoading(false); 
-        })
-        .catch(error => {
-          console.error('Error creating resources:', error);
-        });
+    const fetchResources = async () => {
+      try {
+        const response = await fetch(`${process.env.RECURSOS}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setResources(data);
+        setLoading(false); 
+      } catch (error) {
+        console.error("Error fetching resources:", error);
+      }
     };
-
-
 
     const waitUntilLoad = async () => {
       try {
@@ -61,7 +50,7 @@ export default function NuevoProyecto() {
       }
     };
     waitUntilLoad();
-    fetchResource();
+    fetchResources();
     console.log(resources)
   }, []);
 

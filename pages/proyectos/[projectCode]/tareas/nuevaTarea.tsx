@@ -10,6 +10,7 @@ export default function NuevaTarea() {
 
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [resources, setResources] = useState();
   const projectCode = router.query.projectCode as string; 
 
   const [task] = useState<Task>({
@@ -24,8 +25,35 @@ export default function NuevaTarea() {
     priority: "Baja",
   });
 
+  const url2 = process.env.RECURSOS
+  const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos";
 
   useEffect(() => {
+
+    const fetchResources = async () => {
+
+      fetch(`${url2}`, {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'User-agent': 'learning app',
+        },
+        }).then(response => {
+        if (!response.ok) {
+            return response.json().then(errorInfo => Promise.reject(errorInfo));
+            }
+        return response.json();
+        })
+        .then(data => {
+            console.log('Project updated successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error creating project:', error);
+        });    
+
+
+    };
+
     const waitUntilLoad = async () => {
       try {
         setLoading(false); 
@@ -39,6 +67,8 @@ export default function NuevaTarea() {
       }
     };
     waitUntilLoad();
+    fetchResources();
+    console.log(resources)
   }, []);
 
   if (loading) {

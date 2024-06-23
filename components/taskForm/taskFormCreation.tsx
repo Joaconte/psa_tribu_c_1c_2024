@@ -3,14 +3,10 @@ import React, { useState } from "react";
 import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
-import { Priority, PriorityESP, TaskState, TaskStateESP } from "../../utils/enums";
+import { TaskPriority, TaskPriorityESP, TaskStatus, TaskStatusESP } from "../../utils/enums";
 import { Task } from "../../utils/types";
-import router from "next/router";
+import { getEnumValueFromString } from "@/utils/enumFunctions";
 
-
-function getEnumValueFromString(enumObj: any, str: string): number | undefined {
-    return enumObj[str as keyof typeof enumObj];
-  }
 
   export const TaskFormCreation = ({ task }: {task: Task}): JSX.Element => {
 
@@ -28,8 +24,8 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
         body: JSON.stringify({
             ...updatedTask,
             employeeCode: parseInt(updatedTask.employeeCode),
-            status: getEnumValueFromString(TaskState, updatedTask.status),
-            priority: getEnumValueFromString(Priority, updatedTask.priority),
+            status: getEnumValueFromString(TaskStatus, updatedTask.status),
+            priority: getEnumValueFromString(TaskPriority, updatedTask.priority),
         })
         }).then(response => {
         if (!response.ok) {
@@ -65,18 +61,18 @@ function getEnumValueFromString(enumObj: any, str: string): number | undefined {
                     setTaskInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
             <OptionsList name = "status" label = "Estado" value={updatedTask.status} 
-            options = {TaskState}  optionsESP = {TaskStateESP}
+            options = {TaskStatus}  optionsESP = {TaskStatusESP}
             onChange = {(e) => setTaskInfo((prev) => ({ ...prev, status: e.target.value }))}/>
 
             <OptionsList name = "priority" label = "Prioridad" value={updatedTask.priority} 
-            options = {Priority}  optionsESP = {PriorityESP}
+            options = {TaskPriority}  optionsESP = {TaskPriorityESP}
             onChange = {(e) => setTaskInfo((prev) => ({ ...prev, priority: e.target.value }))}/>
 
             <TextArea name = "description" label = "Descripción" value = {updatedTask.description} placeholder = ""  onChange = {(e) =>
                     setTaskInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
             <OptionsList name = "employeeCode" label = "Desarrollador designado" value={updatedTask.employeeCode} 
-            options = {Priority}  optionsESP = {PriorityESP}
+            options = {TaskPriority}  optionsESP = {TaskPriorityESP}
             onChange = {(e) => setTaskInfo((prev) => ({ ...prev, employeeCode: e.target.value }))}/>
 
             <div className = "flex bg-white space-x-14" >
