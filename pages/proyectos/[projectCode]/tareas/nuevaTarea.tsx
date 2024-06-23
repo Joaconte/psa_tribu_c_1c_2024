@@ -5,7 +5,6 @@ import { Task } from "@/utils/types";
 import { useRouter } from "next/router";
 import { BackButton } from "@/components/buttons";
 import LoadingScreen from "@/components/loadingScreen"
-import RecursoItemSelect from "@/components/recursoItemSelect";
 import { fetchItem } from "@/utils/fetchFunction";
 
 export default function NuevaTarea() {
