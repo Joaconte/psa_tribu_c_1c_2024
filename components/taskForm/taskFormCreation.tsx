@@ -42,7 +42,6 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
         });        
     }
 
-
     function handleSubmit() {
 
         if (!updatedTask.name)
