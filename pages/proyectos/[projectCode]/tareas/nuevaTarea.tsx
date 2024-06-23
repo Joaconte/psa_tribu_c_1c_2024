@@ -48,8 +48,6 @@ export default function NuevaTarea() {
   if (loading) {
     return <LoadingScreen/>
   }
-
-  console.log(resources[0]);
   
   return (
     <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">

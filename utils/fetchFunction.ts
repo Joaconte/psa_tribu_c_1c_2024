@@ -11,3 +11,18 @@ export const fetchItem = async (url: any, str: string, setItem: any, setLoading:
       console.error("Error fetching "+str+":", error);
     }
   };
+
+
+  export const fetchDeleteItem = async (url: any, str: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL + url}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error("Error fetching "+str+":", error);
+    }
+  };

@@ -1,8 +1,7 @@
 import { parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
 import { Resource } from "@/utils/types"
-import Link from "next/link"
 import { BrowserRouter } from "react-router-dom"
-import { BackButton, ContinueCodeProjectAndTaskButton } from "./buttons"
+import { BackButton, ContinueButton, DeleteButton } from "./buttons"
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -27,6 +26,8 @@ function Label({text, value}: {text: string, value: string}){
     
     if (resource)
       taskEmployee = `${resource["Nombre"]} ${resource["Apellido"]}`
+
+    const url = `/tasks/${task['taskCode']}`
   
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
@@ -42,9 +43,11 @@ function Label({text, value}: {text: string, value: string}){
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
+                  <DeleteButton text = "Eliminar tarea" item = "tarea" url = {url}/>
                 </BrowserRouter>
-                <ContinueCodeProjectAndTaskButton text="Actualizar datos" taskCode={task["taskCode"]} projectCode={task['projectCode']} path={"/editarTarea"}/>
-                </div>
+                <ContinueButton text="Actualizar datos"
+                  href = {`/proyectos/${task['projectCode']}/tareas/${task["taskCode"]}/editarTarea`}/>
+               </div>
             </div>  
         </div>  
     )

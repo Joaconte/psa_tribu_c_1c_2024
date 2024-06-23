@@ -3,7 +3,7 @@ import { Task } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from "@/utils/fetchFunction";
+import { fetchDeleteItem, fetchItem } from "@/utils/fetchFunction";
 
 export default function Task() {
 
@@ -20,13 +20,15 @@ export default function Task() {
 
     url= `/tasks/${taskCode}`
     fetchItem(url, "task",setTask, setLoading)
+    
+    url= `/tasks/${taskCode}`
+    fetchDeleteItem(url, "task")
   }, [taskCode]);
   
   if (loading) {
     return <LoadingScreen/>
   }
 
-  
   return (
       <TaskLayer task = {task} resources = {resources}/>
   )

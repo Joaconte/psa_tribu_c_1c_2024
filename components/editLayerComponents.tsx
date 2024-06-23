@@ -52,7 +52,6 @@ function OptionsList({ name, label, value, onChange, options, optionsESP }:
 
 function ResourceOptionsList({ name, label, value, onChange, resources }: 
   {name: string, label: string, value: string, onChange: ChangeEventHandler<any>, resources: any[],}) {
-    console.log(value)
     return (
         <div className="space-y-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label> 

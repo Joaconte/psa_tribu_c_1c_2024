@@ -1,8 +1,9 @@
-import { DeleteButton, ContinueCodeProjectButton, BackButton } from "./buttons"
+import { DeleteButton, BackButton, ContinueButton } from "./buttons"
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Project, Resource } from "@/utils/types";
 import { parseProjectStatusToESP } from "@/utils/enumFunctions";
+import Link from "next/link";
 
 function Label({text, value}: {text: string, value: string}){
     return(
@@ -27,6 +28,9 @@ function Label({text, value}: {text: string, value: string}){
     if (resource)
       projectLeader = `${resource["Nombre"]} ${resource["Apellido"]}`
 
+
+    const url = `/projects/${project['projectCode']}`
+
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
             <H1 value={project['name']}/>
@@ -38,11 +42,14 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Descripción:" value={project['description']}/>
                 <Label text="Fecha de inicio:" value={project['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={project['endDate']}/>
+                <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  href={`/proyectos/${encodeURIComponent(project['projectCode'])}/tareas`}>Ver tareas</Link>
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
+                  <DeleteButton text = "Eliminar proyecto" item = "poryecto" url = {url}/>
                 </BrowserRouter>
-                  <ContinueCodeProjectButton text="Actualizar datos" projectCode={project['projectCode']} path={"/editarProyecto"}/>
+                <ContinueButton text="Actualizar datos" href = {`/proyectos/${project['projectCode']}/editarProyecto`}/>
                 </div>
             </div>  
         </div>  
