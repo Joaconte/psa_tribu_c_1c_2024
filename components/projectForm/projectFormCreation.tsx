@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import { InputDate, InputText, OptionsList, TextArea } from "@/components/editLayerComponents" 
+import { InputDate, InputText, OptionsList, ResourceOptionsList, TextArea } from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
 import { ProjectStatus, ProjectStatusESP } from "../../utils/enums";
-import { Project } from "@/utils/types";
+import { Project, Resource } from "@/utils/types";
 import { getEnumValueFromString } from "@/utils/enumFunctions";
 
-  export const ProjectFormCreation = ({ project }: {project: Project}): JSX.Element => {
+  export const ProjectFormCreation = ({ project, resources }: {project: Project, resources:Resource[]}): JSX.Element => {
 
     const navigate = useNavigate();
     const [updatedProject, setProjectInfo] = useState<Project>(project);
@@ -64,9 +64,8 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
             <TextArea name = "description" label="Descripción" value={updatedProject.description} placeholder = "Descripción"  onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
-            <OptionsList name="leaderCode" label="Lider" value={updatedProject.leaderCode}  
-            options = {ProjectStatus}  optionsESP = {ProjectStatusESP}
-            onChange={(e) => setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))} />
+            <ResourceOptionsList name = "leaderCode" label = "Lider" value={updatedProject.leaderCode} resources = {resources}
+            onChange = {(e) => setProjectInfo((prev) => ({ ...prev, leaderCode: e.target.value }))}/>
 
             <div className = "flex bg-white space-x-14" >
                 <InputDate name = "startDate" label = "Fecha de inicio" value={updatedProject.startDate} onChange = {(e) =>

@@ -1,4 +1,5 @@
 import { parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
+import { Resource } from "@/utils/types"
 import Link from "next/link"
 import { BrowserRouter } from "react-router-dom"
 import { BackButton, ContinueCodeProjectAndTaskButton } from "./buttons"
@@ -17,13 +18,16 @@ function Label({text, value}: {text: string, value: string}){
     )
   }
   
-  export default function TaskLayer({ task }: {task: any}) {
+  export default function TaskLayer({ task, resources}: {task: any, resources:Resource[]}) {
 
     const taskStatus = parseTaskStatusToESP(task['status'])
-    console.log(task['priority'])
     const taskPriority = parseTaskPriorityToESP(task['priority'])
-
-
+    const resource = resources.find(resource => resource["legajo"] === task["employeeCode"]);
+    var taskEmployee = ""
+    
+    if (resource)
+      taskEmployee = `${resource["Nombre"]} ${resource["Apellido"]}`
+  
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
             <H1 value={task['name']}/>
@@ -31,7 +35,7 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Código:" value={task['taskCode']}/>
                 <Label text="Estado:" value={taskStatus}/>
                 <Label text="Prioridad:" value={taskPriority}/>
-                <Label text="employeeCode:" value={task['employeeCode']}/>
+                <Label text="Empleado:" value={taskEmployee}/>
                 <Label text="Descripción:" value={task['description']}/>
                 <Label text="Fecha de inicio:" value={task['startDate']}/>
                 <Label text="Fecha estimada de finalización:" value={task['endDate']}/>

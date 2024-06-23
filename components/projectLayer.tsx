@@ -1,7 +1,7 @@
 import { DeleteButton, ContinueCodeProjectButton, BackButton } from "./buttons"
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Project } from "@/utils/types";
+import { Project, Resource } from "@/utils/types";
 import { parseProjectStatusToESP } from "@/utils/enumFunctions";
 
 function Label({text, value}: {text: string, value: string}){
@@ -18,9 +18,14 @@ function Label({text, value}: {text: string, value: string}){
     )
   }
   
-  export default function ProyectLayer({ project }: {project: Project}) {
+  export default function ProyectLayer({ project, resources }: {project: Project, resources:Resource[]}) {
   
     const projectStatus = parseProjectStatusToESP(project['status'])
+    
+    const resource = resources.find(resource => resource["legajo"] === project["leaderCode"]);
+    var projectLeader = ""
+    if (resource)
+      projectLeader = `${resource["Nombre"]} ${resource["Apellido"]}`
 
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
@@ -28,7 +33,7 @@ function Label({text, value}: {text: string, value: string}){
             <div className="container max-w-7xl mx-auto mt-8 space-y-7">
                 <Label text="Código:" value={project['projectCode']}/>
                 <Label text="Estado:" value={projectStatus}/>
-                <Label text="leaderCode:" value={project['leaderCode']}/>
+                <Label text="leaderCode:" value={projectLeader}/>
                 <Label text="productCode:" value={project['productCode']}/>
                 <Label text="Descripción:" value={project['description']}/>
                 <Label text="Fecha de inicio:" value={project['startDate']}/>

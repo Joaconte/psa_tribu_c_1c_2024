@@ -5,31 +5,25 @@ import React from "react";
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
 import LoadingScreen from "@/components/loadingScreen"
+import { fetchItem } from '@/utils/fetchFunction';
 
 
 export default function EditarProyecto() {
 
   const router = useRouter();
-  const [project, setproject] = useState();  
+  const [project, setproject] = useState(); 
+  const [resources, setResources] = useState([])
   const [loading, setLoading] = useState(true);
   var projectCode = router.query.projectCode;
 
   useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`)
-        console.log(response)
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setproject(data);
-        setLoading(false); 
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-    fetchProject();
+
+    url = `/recursos`
+    fetchItem(url, "resource",setResources, setLoading)
+
+    var url = `/projects/${projectCode}`
+    fetchItem(url, "project",setproject, setLoading)
+
   }, [projectCode]);
 
   if (loading) {
@@ -47,7 +41,7 @@ export default function EditarProyecto() {
       <h1 className="text-4xl mb-5 font-bold ">Actualizar informacion</h1>
       <div className="container max-w-7xl">
         <BrowserRouter>
-          <ProjectFormEdition project={project}/>
+          <ProjectFormEdition project={project} resources={resources}/>
         </BrowserRouter>
       </div>      
     </div>

@@ -3,39 +3,31 @@ import { Task } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
+import { fetchItem } from "@/utils/fetchFunction";
 
 export default function Task() {
 
     const router = useRouter();
+    const [task, setTask] = useState<any>();
+    const [resources, setResources] = useState([])
     const [loading, setLoading] = useState(true);
-  
-    const [task, setTask] = useState<Task | null>(null);
 
     var taskCode = router.query.taskCode;
 
   useEffect(() => {
-   
-    const fetchTask = async () => {
+    var url = `/recursos`
+    fetchItem(url, "resource",setResources, setLoading)
 
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${taskCode}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setTask(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching task:", error);
-      }
-    };
-    fetchTask();
+    url= `/tasks/${taskCode}`
+    fetchItem(url, "task",setTask, setLoading)
   }, [taskCode]);
   
   if (loading) {
     return <LoadingScreen/>
   }
+
+  
   return (
-      <TaskLayer task = {task}/>
+      <TaskLayer task = {task} resources = {resources}/>
   )
 }

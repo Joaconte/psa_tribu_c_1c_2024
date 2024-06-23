@@ -1,4 +1,5 @@
 import { parseProjectStatusToESP } from "@/utils/enumFunctions"
+import { Resource } from "@/utils/types";
 import Link from "next/link"
 
 function CommonItem({text}: {text: any}){
@@ -9,32 +10,38 @@ function CommonItem({text}: {text: any}){
   )
 }
 
-export default function ProyectGridRow({ proyecto }: {proyecto: any}) {
+export default function ProyectGridRow({ project, resources }: {project: any, resources: Resource[]}) {
+
+
+  const resource = resources.find(resource => resource["legajo"] === project["leaderCode"]);
+  var projectLeader = ""
+  if (resource)
+    projectLeader = `${resource["Nombre"]} ${resource["Apellido"]}`
 
   return (
-    <tr key={`${proyecto['projectCode']}`}>
+    <tr key={`${project['projectCode']}`}>
 
-      <CommonItem text={proyecto['projectCode']}/>
+      <CommonItem text={project['projectCode']}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <Link  className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
           href={{
-            pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}`,
+            pathname: `/proyectos/${encodeURIComponent(project['projectCode'])}`,
           }}
-        >{proyecto['name']}
+        >{project['name']}
         </Link>
       </td>
 
-      <CommonItem text={proyecto['leaderCode']}/>
-      <CommonItem text={proyecto['startDate']}/>
-      <CommonItem text={proyecto['endDate']}/>
-      <CommonItem text={parseProjectStatusToESP(proyecto['status'])}/>
+      <CommonItem text={projectLeader}/>
+      <CommonItem text={project['startDate']}/>
+      <CommonItem text={project['endDate']}/>
+      <CommonItem text={parseProjectStatusToESP(project['status'])}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
               href={{
-                  pathname: `/proyectos/${encodeURIComponent(proyecto['projectCode'])}/tareas`,
-                  query : `projectStatus=${proyecto['status']}`
+                  pathname: `/proyectos/${encodeURIComponent(project['projectCode'])}/tareas`,
+                  query : `projectStatus=${project['status']}`
               }}>ver</Link>
       </td>
     </tr>

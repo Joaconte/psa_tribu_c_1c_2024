@@ -3,34 +3,23 @@ import { Project, Resource } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
+import { fetchItem } from "@/utils/fetchFunction";
 
 
 export default function Proyecto() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
   const [project, setproject] = useState<Project | null>(null);
   const [resources, setResources] = useState([])
+  const [loading, setLoading] = useState(true);
 
   var projectCode = router.query.projectCode;
 
   useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setproject(data);
-        setLoading(false); 
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
+      var url = `/recursos`
+      fetchItem(url, "resources",setResources, setLoading)
 
-    fetchProject();
-    console.log(resources)
-
+      url = `/projects/${projectCode}`
+      fetchItem(url, "project",setproject, setLoading)
   }, [projectCode]);
 
   if (loading) {
@@ -38,10 +27,10 @@ export default function Proyecto() {
   }
 
   if (!project) {
-    return <div>Error al cargar el proyecto</div>; // Maneja la situación cuando no se puede cargar el proyecto
+    return <div>Error al cargar el proyecto</div>;
   }
 
   return (
-    <ProyectLayer project = {project}/>
+    <ProyectLayer project = {project} resources = {resources}/>
   )
 }

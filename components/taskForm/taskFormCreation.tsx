@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import {OptionsList, InputText, TextArea, InputDate} from "@/components/editLayerComponents" 
+import {OptionsList, InputText, TextArea, InputDate, ResourceOptionsList} from "@/components/editLayerComponents" 
 import { ApplyButton, BackButton} from "@/components/buttons"
 import { useNavigate } from "react-router-dom";
 import { TaskPriority, TaskPriorityESP, TaskStatus, TaskStatusESP } from "../../utils/enums";
-import { Task } from "../../utils/types";
+import { Resource, Task } from "../../utils/types";
 import { getEnumValueFromString } from "@/utils/enumFunctions";
 
 
-  export const TaskFormCreation = ({ task }: {task: Task}): JSX.Element => {
+  export const TaskFormCreation = ({ task, resources }: {task: Task, resources:Resource[]}): JSX.Element => {
 
     const navigate = useNavigate();
     const [ updatedTask, setTaskInfo] = useState<Task>(task);
@@ -57,8 +57,8 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
     return (
 
         <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
-            <InputText name = "name" label = "Título" value={updatedTask.name}  placeholder = "" onChange = {(e) =>
-                    setTaskInfo((prev) => ({ ...prev, name: e.target.value }))}/>
+            <InputText name = "name" label = "Título" value={updatedTask.name}  placeholder = "" 
+            onChange = {(e) => setTaskInfo((prev) => ({ ...prev, name: e.target.value }))}/>
 
             <OptionsList name = "status" label = "Estado" value={updatedTask.status} 
             options = {TaskStatus}  optionsESP = {TaskStatusESP}
@@ -68,11 +68,10 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
             options = {TaskPriority}  optionsESP = {TaskPriorityESP}
             onChange = {(e) => setTaskInfo((prev) => ({ ...prev, priority: e.target.value }))}/>
 
-            <TextArea name = "description" label = "Descripción" value = {updatedTask.description} placeholder = ""  onChange = {(e) =>
-                    setTaskInfo((prev) => ({ ...prev, description: e.target.value }))}/>
+            <TextArea name = "description" label = "Descripción" value = {updatedTask.description} placeholder = ""  
+            onChange = {(e) => setTaskInfo((prev) => ({ ...prev, description: e.target.value }))}/>
                     
-            <OptionsList name = "employeeCode" label = "Desarrollador designado" value={updatedTask.employeeCode} 
-            options = {TaskPriority}  optionsESP = {TaskPriorityESP}
+            <ResourceOptionsList name = "employeeCode" label = "Empleado" value={updatedTask.employeeCode} resources = {resources}
             onChange = {(e) => setTaskInfo((prev) => ({ ...prev, employeeCode: e.target.value }))}/>
 
             <div className = "flex bg-white space-x-14" >
@@ -92,3 +91,4 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
   );
 
 }
+

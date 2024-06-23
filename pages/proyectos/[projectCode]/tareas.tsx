@@ -7,10 +7,6 @@ import LoadingScreen from "@/components/loadingScreen"
 import { BrowserRouter } from "react-router-dom"
 import { getEnumValueFromString, parseTaskStatusToESP } from "@/utils/enumFunctions"
 
-
-
-
-
 function HeaderItem({ title }: { title: string }) {
   return <tr>
           <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
@@ -54,7 +50,6 @@ export default function Tareas() {
   }
 
 
-
   function TasksPerColumn({ estado }: { estado: TaskStatus }){
     return <> 
     {list.filter((tarea)=> getEnumValueFromString( TaskStatus, tarea['status']) == estado)
@@ -65,7 +60,6 @@ export default function Tareas() {
     ))}
     </>
   }
-
   
     function NewTaskButton({ projectStatus, projectCode }: { projectStatus: any, projectCode: any }){
     if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
@@ -86,7 +80,6 @@ export default function Tareas() {
         </tbody>
       </table>
       )
-      
   }
 
   return (
@@ -118,24 +111,3 @@ export default function Tareas() {
   )
   
 }
-
-/*
-
-                <table className="min-w-full">
-                  <thead>
-                    <tr>
-                      <HeaderItem title="NUEVAS" />
-                      <HeaderItem title="EN PROGRESO" />
-                      <HeaderItem title="CERADAS" />
-                      <HeaderItem title="BLOQUEADAS" />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <Column estado={TaskState.NEW}/>
-                    <Column estado={TaskState.IN_PROGRESS}/>
-                    <Column estado={TaskState.CLOSED}/>
-                    <Column estado={TaskState.LOCKED}/>
-                  </tbody>
-                </table>
-
-*/

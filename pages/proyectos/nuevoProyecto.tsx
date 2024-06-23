@@ -5,6 +5,7 @@ import { ProjectFormCreation } from "@/components/projectForm/projectFormCreatio
 import { BackButton } from "@/components/buttons";
 import { Project, Resource } from "@/utils/types";
 import LoadingScreen from "@/components/loadingScreen"
+import { fetchItem } from "@/utils/fetchFunction";
 
 export default function NuevoProyecto() {
   
@@ -23,19 +24,9 @@ export default function NuevoProyecto() {
   const [resources, setResources] = useState<Resource[]>([]);
 
   useEffect(() => {
-    const fetchResources = async () => {
-      try {
-        const response = await fetch(`${process.env.RECURSOS}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setResources(data);
-        setLoading(false); 
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-      }
-    };
+
+    const url = `/recursos`
+    fetchItem(url, "resource",setResources, setLoading)
 
     const waitUntilLoad = async () => {
       try {
@@ -50,8 +41,6 @@ export default function NuevoProyecto() {
       }
     };
     waitUntilLoad();
-    fetchResources();
-    console.log(resources)
   }, []);
 
   if (loading) {
@@ -65,7 +54,7 @@ export default function NuevoProyecto() {
       <div className="container max-w-7xl mx-auto mt-8 space-y-7">
       
       <BrowserRouter>
-        <ProjectFormCreation project={project}/>
+        <ProjectFormCreation project={project} resources={resources}/>
       </BrowserRouter>
       
       </div>
