@@ -13,6 +13,7 @@ export default function Task() {
     const [loading, setLoading] = useState(true);
 
     var taskCode = router.query.taskCode;
+    const projectStatus = router.query.projectStatus;
 
   useEffect(() => {
     var url = `/recursos`
@@ -20,9 +21,6 @@ export default function Task() {
 
     url= `/tasks/${taskCode}`
     fetchItem(url, "task",setTask, setLoading)
-    
-    url= `/tasks/${taskCode}`
-    fetchDeleteItem(url, "task")
   }, [taskCode]);
   
   if (loading) {
@@ -30,6 +28,6 @@ export default function Task() {
   }
 
   return (
-      <TaskLayer task = {task} resources = {resources}/>
+      <TaskLayer task = {task} resources = {resources} projectStatus={projectStatus}/>
   )
 }

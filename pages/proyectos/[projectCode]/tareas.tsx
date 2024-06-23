@@ -55,7 +55,7 @@ export default function Tareas() {
     {list.filter((tarea)=> getEnumValueFromString( TaskStatus, tarea['status']) == estado)
     .map((tarea) => (
       <tr key={tarea['taskCode']} >
-        <TaskGridCell tarea={tarea} />
+        <TaskGridCell tarea={tarea} projectStatus = {projectStatus}/>
       </tr>
     ))}
     </>

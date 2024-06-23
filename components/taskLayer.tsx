@@ -1,4 +1,5 @@
-import { parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
+import { getEnumValueFromString, parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
+import { ProjectStatus } from "@/utils/enums"
 import { Resource } from "@/utils/types"
 import { BrowserRouter } from "react-router-dom"
 import { BackButton, ContinueButton, DeleteButton } from "./buttons"
@@ -16,14 +17,23 @@ function Label({text, value}: {text: string, value: string}){
         <h1 className="text-4xl mb-5 font-bold ">{value}</h1>
     )
   }
+
+  function ActualiceButton({ projectStatus, projectCode, taskCode }: { projectStatus: any, projectCode: any, taskCode:any }){
+    if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
+      return <ContinueButton text="Actualizar datos"
+        href = {`/proyectos/${projectCode}/tareas/${taskCode}/editarTarea`}/>
+    }
+      return null;
+    }
   
-  export default function TaskLayer({ task, resources}: {task: any, resources:Resource[]}) {
+  export default function TaskLayer({ task, resources, projectStatus}: {task: any, resources:Resource[], projectStatus:any}) {
 
     const taskStatus = parseTaskStatusToESP(task['status'])
     const taskPriority = parseTaskPriorityToESP(task['priority'])
     const resource = resources.find(resource => resource["legajo"] === task["employeeCode"]);
     var taskEmployee = ""
-    
+  
+
     if (resource)
       taskEmployee = `${resource["Nombre"]} ${resource["Apellido"]}`
 
@@ -45,8 +55,7 @@ function Label({text, value}: {text: string, value: string}){
                   <BackButton text = "Volver"/>
                   <DeleteButton text = "Eliminar tarea" item = "tarea" url = {url}/>
                 </BrowserRouter>
-                <ContinueButton text="Actualizar datos"
-                  href = {`/proyectos/${task['projectCode']}/tareas/${task["taskCode"]}/editarTarea`}/>
+                <ActualiceButton projectStatus ={projectStatus} projectCode={task.projectCode} taskCode={task.taskCode} />
                </div>
             </div>  
         </div>  

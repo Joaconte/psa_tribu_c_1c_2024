@@ -27,7 +27,7 @@ const DeleteButton = ({text, item, url}: {text: string, item: string, url: strin
     function ConfirmAlert(){
         if (window.confirm("Está seguro que desea eliminar la tarea")){
             fetchDeleteItem(url, item)
-            //navigate(-1);
+            navigate(-1);
         }
     }
 
