@@ -5,9 +5,9 @@ export enum ProjectStatus {
   }
   
 export enum ProjectStatusESP{
-    "Iniciado", 
-    "Suspendido", 
-    "Terminado"
+    "INICIADO", 
+    "SUSPENDIDO", 
+    "TERMINADO"
   }
 
   export enum TaskStatus {
@@ -18,10 +18,10 @@ export enum ProjectStatusESP{
   }
 
   export enum TaskStatusESP {
-    "Nueva",
-    "En progreso",
-    "Cerrada",
-    "Bloqueada"
+    "NUEVA",
+    "EN PROGRESO",
+    "CERRADA",
+    "BLOQUEADA"
   }
   
   export enum TaskPriority {
@@ -31,7 +31,7 @@ export enum ProjectStatusESP{
   }
 
   export enum TaskPriorityESP {
-    "Baja",
-    "Medio",
-    "Alta"
+    "BAJA",
+    "MEDIO",
+    "ALTA"
   }

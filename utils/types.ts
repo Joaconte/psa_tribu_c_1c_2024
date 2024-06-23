@@ -1,7 +1,7 @@
 export interface Resource {
   legajo: string;
-  nombre: string;
-  apellido: string;
+  Nombre: string;
+  Apellido: string;
 }
 
 export interface Project {
