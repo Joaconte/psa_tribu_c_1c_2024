@@ -52,7 +52,6 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
     }
 
     return (
-
         <div className="container max-w-7xl mx-auto mt-8 space-y-7">                  
             <InputText name = "name" label="Título" value ={updatedProject.name} placeholder = "Título" onChange = {(e) =>
                     setProjectInfo((prev) => ({ ...prev, name: e.target.value }))}/>

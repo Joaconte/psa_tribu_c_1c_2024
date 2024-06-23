@@ -1,22 +1,25 @@
-import { useEffect, useRef, useState } from "react"
-import TaskGridCell from "@/components/taskGridCell"
+import { useEffect, useState } from "react"
+import TaskGridCell from "@/components/taskColumn"
 import { BackButton, ContinueButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
 import { ProjectStatus, TaskStatus } from "@/utils/enums"
 import LoadingScreen from "@/components/loadingScreen"
 import { BrowserRouter } from "react-router-dom"
 import { getEnumValueFromString, parseTaskStatusToESP } from "@/utils/enumFunctions"
+import TaskColumn from "@/components/taskColumn"
+import { fetchItem } from "@/utils/fetchFunction"
 
-function HeaderItem({ title }: { title: string }) {
-  return <tr>
-          <th className="px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
-        </tr>
-}
+function NewTaskButton({ projectStatus, projectCode }: { projectStatus: any, projectCode: any }){
+  if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
+    return <ContinueButton text="Nueva tarea" href = {`/proyectos/${projectCode}/tareas/nuevaTarea`}/>
+  }
+    return null;
+  }
 
 export default function Tareas() {
 
   const router = useRouter();
-  const [list, setList] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const projectCode = router.query.projectCode;
@@ -24,80 +27,33 @@ export default function Tareas() {
   
   useEffect(() => {
 
-    const fetchTasks = async () => {
-
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects/${projectCode}/tasks`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setList(data);
-        setLoading(false); 
-      } catch (error) {
-        console.error("Error fetching tasks:", error);
-      }
-    }
-    fetchTasks();
+    const url = `/projects/${projectCode}/tasks`
+    fetchItem(url, "tasks",setTasks, setLoading)
+  
   }, [projectCode, projectStatus]);
     
   if (loading) {
     return <LoadingScreen/>
   }
 
-  if (!list) {
+  if (!tasks) {
     return <div>Error al cargar las tareas</div>; 
-  }
-
-
-  function TasksPerColumn({ estado }: { estado: TaskStatus }){
-    return <> 
-    {list.filter((tarea)=> getEnumValueFromString( TaskStatus, tarea['status']) == estado)
-    .map((tarea) => (
-      <tr key={tarea['taskCode']} >
-        <TaskGridCell tarea={tarea} projectStatus = {projectStatus}/>
-      </tr>
-    ))}
-    </>
-  }
-  
-    function NewTaskButton({ projectStatus, projectCode }: { projectStatus: any, projectCode: any }){
-    if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
-      return <ContinueButton text="Nueva tarea" href = {`/proyectos/${projectCode}/tareas/nuevaTarea`}/>
-    }
-      return null;
-    }
-
-  function Column({ estado }: { estado: TaskStatus }) {
-    return (
-
-      <table className="min-w-ful">
-        <thead>
-          <HeaderItem title = {parseTaskStatusToESP(TaskStatus[estado]).toUpperCase()} />
-        </thead>
-        <tbody className="min-w-full border">
-          <TasksPerColumn estado={estado}/>
-        </tbody>
-      </table>
-      )
   }
 
   return (
     <>
-      <div className="container max-w-7xl mt-8 space-y-6">
+      <div className="container max-w-7xl mt-8 space-y-6" >
         <div className="mb-4">
-          <h1 className="text-3xl font-bold decoration-gray-400">Tareas</h1>
+          <h1 className="text-3xl font-bold decoration-gray-400 ">Tareas</h1>
         </div>
           <div className="flex">
-            <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ">
-              <div className="grid grid-cols-4 inline-block min-w-full overflow-scroll overflow-x-hidden border-b border-gray-200 shadow sm:rounded-lg  ">
-          
-                <Column estado={TaskStatus.NEW}/>
-                <Column estado={TaskStatus.IN_PROGRESS}/>
-                <Column estado={TaskStatus.CLOSED}/>
-                <Column estado={TaskStatus.LOCKED}/>
-
-              </div>
+            <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">  
+              <div className="grid grid-cols-4 max-h-[75%] max-w-full overflow-y-auto border-gray-200 shadow sm:rounded-lg">
+                  <TaskColumn estado={TaskStatus.NEW} list={tasks} projectStatus={projectStatus}/>
+                  <TaskColumn estado={TaskStatus.IN_PROGRESS} list={tasks} projectStatus={projectStatus}/>
+                  <TaskColumn estado={TaskStatus.CLOSED} list={tasks} projectStatus={projectStatus}/>
+                  <TaskColumn estado={TaskStatus.LOCKED} list={tasks} projectStatus={projectStatus}/>
+                </div>
               <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>

@@ -3,7 +3,7 @@ import { Task } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchDeleteItem, fetchItem } from "@/utils/fetchFunction";
+import { fetchItem } from "@/utils/fetchFunction";
 
 export default function Task() {
 

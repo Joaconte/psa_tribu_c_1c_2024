@@ -41,7 +41,7 @@ function Label({text, value}: {text: string, value: string}){
   
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
-            <H1 value={task['name']}/>
+            <H1 value={task.name}/>
             <div className="container max-w-7xl mx-auto mt-8 space-y-7">
                 <Label text="Código:" value={task.taskCode}/>
                 <Label text="Estado:" value={taskStatus}/>

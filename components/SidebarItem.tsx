@@ -51,9 +51,7 @@ const SideBarItem = ({ href, title, children }: ISidebarItem) => {
   return (
     <li className="m-2" key={title}>
       <Link href={href}>
-        <div
-          className={`flex items-center w-full p-2 transition duration-75 rounded-lg group hover:bg-amber-100 dark:hover:bg-amber-700`}
-        >
+        <div className={`flex items-center w-full p-2 transition duration-75 rounded-lg group hover:bg-amber-100 dark:hover:bg-amber-700`}>
           <span className={`flex-1 ml-2 text-left whitespace-nowrap ${router.asPath === href && "font-bold"}`}>
             {title}
           </span>
