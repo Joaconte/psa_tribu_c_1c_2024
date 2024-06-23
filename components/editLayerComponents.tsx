@@ -51,7 +51,7 @@ function OptionsList({ name, label, value, onChange, options, optionsESP }:
 
 
 function ResourceOptionsList({ name, label, value, onChange, resources }: 
-  {name: string, label: string, value: string, onChange: ChangeEventHandler<any>, resources: any[],}) {
+  {name: string, label: string, value: string, onChange: ChangeEventHandler<any>, resources: Resource[],}) {
     return (
         <div className="space-y-2">
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">{label}</label> 
@@ -60,7 +60,7 @@ function ResourceOptionsList({ name, label, value, onChange, resources }:
         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">  
         <option value="">-- Seleccionar --</option>
             {resources.map((resource, index) => ( 
-            <option key={index} value={resource['legajo']}>{resource['Nombre']} {resource['Apellido']}</option>))}
+            <option key={index} value={resource.legajo}>{resource.Nombre} {resource.Apellido}</option>))}
         </select>
       </div>
     )
