@@ -57,8 +57,8 @@ export default function Tareas() {
 }
 
   function Status(){
-      const className = "text-2xl font-bold decoration-gray-400 " + projectStatusColor(projectStatus)
-      return <h2 className={className}>{parseToEsp(projectStatus, ProjectStatus, ProjectStatusESP)}</h2>
+      const className = "text-2xl font-bold decoration-gray-400 " + projectStatusColor(projectStatus as string)
+      return <h2 className={className}>{parseToEsp(projectStatus as string, ProjectStatus, ProjectStatusESP)}</h2>
   }
 
   return (
