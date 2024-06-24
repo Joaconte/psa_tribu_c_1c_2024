@@ -1,3 +1,5 @@
+import { Project, Resource } from "./types";
+
 export const fetchItem = async (url: any, str: string, setItem: any, setLoading: any) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL + url}`);
@@ -43,3 +45,16 @@ export const fetchItem = async (url: any, str: string, setItem: any, setLoading:
       console.error("Error fetching "+str+":", error);
     }
   };
+
+
+  export function waitResource(resources: Resource[], resource: any, code: any,
+    setResource: any, setStringResource: any, setLoading: any){
+
+      if(code){
+        setResource(resources.find(resource => resource.legajo === code))
+        if (resource){
+            setStringResource(`${resource.Nombre} ${resource.Apellido}`)
+            setLoading(false)
+          }
+    } else setLoading(false)
+  }
