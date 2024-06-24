@@ -1,6 +1,6 @@
 import { getEnumValueFromString, parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
 import { ProjectStatus } from "@/utils/enums"
-import { waitResource } from "@/utils/fetchFunction"
+import { fetchResource, waitResource } from "@/utils/fetchFunction"
 import { Resource, Task } from "@/utils/types"
 import { useEffect, useState } from "react"
 import { BrowserRouter } from "react-router-dom"
@@ -36,19 +36,12 @@ function Label({text, value}: {text: string, value: string}){
   
   export default function TaskLayer({ task, resources, projectStatus}: {task: Task, resources:Resource[], projectStatus:any}) {
 
-    const [resource, setResource] = useState<Resource>()
-    const [taskEmployee, setTaskEmployee] = useState<string>()
-    const [loading, setLoading] = useState(true);
-    
-    useEffect(() => {
-      waitResource(resources, resource, task.employeeCode, 
-        setResource, setTaskEmployee, setLoading)
-    }, [taskEmployee, resources]);
+    const resource = resources.find(resource => resource.legajo === task.employeeCode);
+    var taskEmployee = ""
 
-    if (loading) {
-      return <LoadingScreen/>
-    }
-    
+    if (resource)
+      taskEmployee = `${resource.Nombre} ${resource.Apellido}`
+
     const taskStatus = parseTaskStatusToESP(task.status)
     const taskPriority = parseTaskPriorityToESP(task.priority)
 
@@ -61,7 +54,7 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Código:" value={task.taskCode}/>
                 <Label text="Estado:" value={taskStatus}/>
                 <Label text="Prioridad:" value={taskPriority}/>
-                <Label text="Empleado:" value={taskEmployee as string}/>
+                <Label text="Empleado:" value={taskEmployee}/>
                 <Label text="Descripción:" value={task.description}/>
                 <Label text="Fecha de inicio:" value={task.startDate}/>
                 <Label text="Fecha estimada de finalización:" value={task.endDate}/>
