@@ -5,7 +5,7 @@ import Link from "next/link"
 
 function CommonItem({text}: {text: any}){
   return(
-    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center justify-center">
       <div className="flex justify-center">{text}</div>
     </td>
   )
@@ -16,7 +16,7 @@ function StatusItem({project}: {project: any}){
   const classname = "flex justify-center " + projectStatusColor(project.status)
 
   return(
-    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center justify-center">
       <div className={classname}>{parseProjectStatusToESP(project.status)}</div>
     </td>
   )
@@ -35,7 +35,7 @@ export default function ProyectGridRow({ project, resources }: {project: any, re
       <CommonItem text={project.projectCode}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
-        <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline justify-center"
+        <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline text-center justify-center"
           href={`/proyectos/${encodeURIComponent(project.projectCode)}`}>{project.name}</Link>
       </td>
 
@@ -45,7 +45,7 @@ export default function ProyectGridRow({ project, resources }: {project: any, re
       <StatusItem project={project}/>
 
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-      <Link className="flex justify-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      <Link className="flex justify-center font-medium text-blue-600 dark:text-blue-500 hover:underline text-center justify-center"
               href={{ pathname: `/proyectos/${encodeURIComponent(project.projectCode)}/tareas`,
                   query : `projectStatus=${project.status}&projectName=${project.name}`
               }}>ver</Link>
