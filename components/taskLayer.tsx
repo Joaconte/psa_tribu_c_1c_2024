@@ -1,6 +1,6 @@
 import { getEnumValueFromString, parseTaskPriorityToESP, parseTaskStatusToESP } from "@/utils/enumFunctions"
 import { ProjectStatus } from "@/utils/enums"
-import { Resource } from "@/utils/types"
+import { Resource, Task } from "@/utils/types"
 import { BrowserRouter } from "react-router-dom"
 import { BackButton, ContinueButton, DeleteButton } from "./buttons"
 
@@ -26,7 +26,7 @@ function Label({text, value}: {text: string, value: string}){
       return null;
     }
   
-  export default function TaskLayer({ task, resources, projectStatus}: {task: any, resources:Resource[], projectStatus:any}) {
+  export default function TaskLayer({ task, resources, projectStatus}: {task: Task, resources:Resource[], projectStatus:any}) {
 
     const taskStatus = parseTaskStatusToESP(task.status)
     const taskPriority = parseTaskPriorityToESP(task.priority)
