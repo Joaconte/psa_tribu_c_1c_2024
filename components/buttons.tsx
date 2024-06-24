@@ -11,7 +11,9 @@ function ContinueButton({ text, href }: {text: string, href: string} ) {
 }
 
 const BackButton = ({text}: {text: string}): JSX.Element => {
+
     const navigate = useNavigate();
+
     return(
         <button className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 
         focus:outline-none bg-white rounded-lg border border-gray-500 hover:bg-gray-100 hover:text-blue-700
@@ -27,7 +29,9 @@ const DeleteButton = ({text, item, url, art}: {text: string, item: string, url: 
     function ConfirmAlert(){
         if (window.confirm("Está seguro que desea eliminar "+art+" "+item)){
             fetchDeleteItem(url, item)
-            navigate(-1);
+            setTimeout(() => {
+                navigate(-1)
+            }, 300);
         }
     }
 

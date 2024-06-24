@@ -35,7 +35,9 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
         })
         .then(() => {
             window.alert("Tarea creada correctamente")
-            navigate(-1)
+            setTimeout(() => {
+                navigate(-1)
+            }, 0);
         })
         .catch(() => {
             window.alert("Se produjo un error creando la tarea")
