@@ -36,10 +36,10 @@ export default function Tareas() {
   if (loading) {
     return <LoadingScreen/>
   }
-
   if (!tasks) {
     return <div>Error al cargar las tareas</div>; 
   }
+
   function ShowTasks(){
     if (tasks.length == 0){
     return (<div>
@@ -47,7 +47,7 @@ export default function Tareas() {
     </div>)
     }else 
     return(
-      <div className="grid grid-cols-4 max-h-[75%] max-w-full overflow-y-auto border-gray-200 shadow sm:rounded-lg">
+      <div className="grid grid-cols-4 max-h-[70%] max-w-full overflow-y-auto border-gray-200 shadow sm:rounded-lg">
         <TaskColumn estado={TaskStatus.NEW} list={tasks} projectStatus={projectStatus}/>
         <TaskColumn estado={TaskStatus.IN_PROGRESS} list={tasks} projectStatus={projectStatus}/>
         <TaskColumn estado={TaskStatus.CLOSED} list={tasks} projectStatus={projectStatus}/>

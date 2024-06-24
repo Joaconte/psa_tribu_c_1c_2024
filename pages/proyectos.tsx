@@ -19,7 +19,7 @@ export default function Proyectos() {
     fetchResource(setResources, setLoading)
   
     const url = `/projects`
-    fetchItem(url, "projects",setProjects, setLoading)
+    fetchItem(url, "proyectos",setProjects, setLoading)
 
   }, []);
   
@@ -31,44 +31,11 @@ export default function Proyectos() {
     return <div>Error al cargar los proyectos</div>; 
   }
 
-  /*
-    const filtrarPorNombre = () => {
-      return list.filter((proyecto) => {
-        return (proyecto["name"].toLowerCase().includes("a".toLowerCase()))
-      });
-    };
-    */
-
-  function buscador(){
-    return(
-      <div className="max-w-md mx-auto inset-y-0 end-20">   
-      <div className="relative">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                  <path stroke="currentColor" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-              </svg>
-          </div>
-      <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border 
-      border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 
-      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-      placeholder="Buscar por nombre..." onChange= {handleChange} />
-    </div>
-  </div>
-    )
-  }
-  
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    const { name, value } = e.target;
-    console.log(value)
-    return(<Render sortedList={projects}/>)
-  };
-
-  const sortedList = projects.sort((a, b) => {
+  const sortedProjects = projects.sort((a, b) => {
     return  parseInt(a['projectCode']) -  parseInt(b['projectCode']);
   });
 
-  function Render({sortedList}: {sortedList: any[]}){
-    return(
+  return(
       <div className="container max-w-7xl mt-8 space-y-6 ">
       <div className="mb-10 flex relative ">
           <h1 className="text-3xl font-bold decoration-gray-400">Proyectos</h1>
@@ -89,7 +56,7 @@ export default function Proyectos() {
                 </tr>
               </thead>
               <tbody>
-                {sortedList.map((project) => ( 
+                {sortedProjects.map((project) => ( 
                 <ProyectGridRow key={project['projectCode']} project={project} resources = {resources}/>
                 ))}
               </tbody>
@@ -101,10 +68,5 @@ export default function Proyectos() {
         </div>
       </div>
   </div>
-  )
-}
-
-  return (
-    <Render sortedList={sortedList}/>
   )
 }

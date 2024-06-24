@@ -33,12 +33,12 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
             }
         return response.json();
         })
-        .then(data => {
-            console.log('Task updated successfully:', data);
+        .then(() => {
+            window.alert("Tarea creada correctamente")
             navigate(-1)
         })
-        .catch(error => {
-            console.error('Error creating task:', error);
+        .catch(() => {
+            window.alert("Se produjo un error creando la tarea")
         });        
     }
 

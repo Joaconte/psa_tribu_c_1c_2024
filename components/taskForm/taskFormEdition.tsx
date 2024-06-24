@@ -32,12 +32,12 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
             }
         return response.json();
         })
-        .then(data => {
-            console.log('Project updated successfully:', data);
+        .then(() => {
+            window.alert("Tarea actualizada correctamente")
             navigate(-1)
         })
-        .catch(error => {
-            console.error('Error creating project:', error);
+        .catch(() => {
+            window.alert("Se produjo un error actualizando la tarea")
         });        
     }
 
