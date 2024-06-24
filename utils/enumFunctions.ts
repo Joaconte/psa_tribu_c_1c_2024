@@ -22,12 +22,11 @@ export function parseTaskStatusToESP(status: string){
 }
 
 export function projectStatusColor(status: string){
-    var color
     if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.INITIATED){ 
-        return "text-green-700";
+        return " text-green-700 ";
     }else if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.SUSPENDED) {
-        return "text-yellow-400";
+        return " text-yellow-400 ";
     }
-    return "text-red-700";
+    return " text-red-700 ";
     
 }
