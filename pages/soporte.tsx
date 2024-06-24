@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen";
 import Link from "next/link";
-import Image from 'next/image'
-
 
 export default function Soporte() {
   const [loading, setLoading] = useState(true);

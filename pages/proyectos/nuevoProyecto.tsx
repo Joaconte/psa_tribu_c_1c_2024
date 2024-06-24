@@ -25,22 +25,8 @@ export default function NuevoProyecto() {
 
   useEffect(() => {
 
-
     fetchResource(setResources, setLoading)
 
-    const waitUntilLoad = async () => {
-      try {
-        setLoading(false); 
-          return(
-            <BrowserRouter>
-              <BackButton text={""}/>
-            </BrowserRouter>
-          )
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-    waitUntilLoad();
   }, []);
 
   if (loading) {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import ProyectGridRow from "@/components/proyectGridRow"
 import { ContinueButton } from "@/components/buttons"
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from "@/utils/fetchFunction"
+import { fetchItem, fetchResource } from "@/utils/fetchFunction"
 
 
 function HeaderItem({ title }: { title: string }) {
@@ -16,10 +16,9 @@ export default function Proyectos() {
 
   useEffect(() => {
     
-    var url = `/recursos`
-    fetchItem(url, "resources",setResources, setLoading)
-    
-    url = `/projects`
+    fetchResource(setResources, setLoading)
+  
+    const url = `/projects`
     fetchItem(url, "projects",setProjects, setLoading)
 
   }, []);
@@ -58,8 +57,6 @@ export default function Proyectos() {
     )
   }
   
-
-
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     console.log(value)
@@ -104,9 +101,8 @@ export default function Proyectos() {
         </div>
       </div>
   </div>
-
-    )
-  }
+  )
+}
 
   return (
     <Render sortedList={sortedList}/>

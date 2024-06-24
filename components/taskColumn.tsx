@@ -19,7 +19,7 @@ export default function TaskColumn({ estado, list, projectStatus  }: { estado: T
 
 function HeaderItem({ title }: { title: string }) {
   return <tr>
-          <th className="text-center px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
+          <th className="text-center h-10 px-12 py-3 text-sm text-left text-gray-800 border-b border-gray-200 bg-gray-50 ">{title}</th>
         </tr>
 }
 

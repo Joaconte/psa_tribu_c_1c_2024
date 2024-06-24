@@ -39,6 +39,21 @@ export default function Tareas() {
   if (!tasks) {
     return <div>Error al cargar las tareas</div>; 
   }
+  function ShowTasks(){
+    if (tasks.length == 0){
+    return (<div>
+      <h1 className="text-2xl"> Este proyecto se encuentra sin tareas</h1>
+    </div>)
+    }else 
+    return(
+      <div className="grid grid-cols-4 max-h-[75%] max-w-full overflow-y-auto border-gray-200 shadow sm:rounded-lg">
+        <TaskColumn estado={TaskStatus.NEW} list={tasks} projectStatus={projectStatus}/>
+        <TaskColumn estado={TaskStatus.IN_PROGRESS} list={tasks} projectStatus={projectStatus}/>
+        <TaskColumn estado={TaskStatus.CLOSED} list={tasks} projectStatus={projectStatus}/>
+        <TaskColumn estado={TaskStatus.LOCKED} list={tasks} projectStatus={projectStatus}/>
+      </div>
+    )
+}
 
   return (
     <>
@@ -48,12 +63,7 @@ export default function Tareas() {
         </div>
           <div className="flex">
             <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">  
-              <div className="grid grid-cols-4 max-h-[75%] max-w-full overflow-y-auto border-gray-200 shadow sm:rounded-lg">
-                  <TaskColumn estado={TaskStatus.NEW} list={tasks} projectStatus={projectStatus}/>
-                  <TaskColumn estado={TaskStatus.IN_PROGRESS} list={tasks} projectStatus={projectStatus}/>
-                  <TaskColumn estado={TaskStatus.CLOSED} list={tasks} projectStatus={projectStatus}/>
-                  <TaskColumn estado={TaskStatus.LOCKED} list={tasks} projectStatus={projectStatus}/>
-                </div>
+              <ShowTasks/>
               <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
