@@ -38,7 +38,7 @@ function TaskGridCell({ tarea, projectStatus }: {tarea: Task, projectStatus: any
   const projectCode = tarea['projectCode'];
   return (
     <td key={`${tarea.name}`} className="px-12 py-4 w-full h-full whitespace-no-wrap border border-gray-200">
-      <Link className="flex items-center justify-center w-full h-full font-medium hover:underline "
+      <Link className="flex text-center justify-center w-full h-full font-medium hover:underline"
         href={{ pathname: `/proyectos/${tarea.projectCode}/tareas/${tarea.taskCode}`,
         query : `projectStatus=${projectStatus}`,
         }} >{tarea.name}</Link>
