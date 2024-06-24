@@ -4,11 +4,10 @@ import Link from "next/link";
 import Image from 'next/image'
 
 
-export default function Proyectos() {
+export default function Soporte() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulamos una llamada de datos con un timeout
     setTimeout(() => {
       setLoading(false);
     }, 2000);
