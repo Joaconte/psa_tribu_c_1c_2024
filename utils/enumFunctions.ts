@@ -21,7 +21,7 @@ export function parseTaskStatusToESP(status: string){
     return parseToEsp(status, TaskStatus, TaskStatusESP)
 }
 
-export function projectStatusColor(status: string){
+export function projectStatusColor(status: any){
     if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.INITIATED){ 
         return " text-green-700 ";
     }else if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.SUSPENDED) {

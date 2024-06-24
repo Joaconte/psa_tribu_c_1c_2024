@@ -57,8 +57,16 @@ export default function Tareas() {
 }
 
   function Status(){
-      const className = "text-2xl font-bold decoration-gray-400 " + projectStatusColor(projectStatus as string)
-      return <h2 className={className}>{parseToEsp(projectStatus as string, ProjectStatus, ProjectStatusESP)}</h2>
+    var color;
+    if(getEnumValueFromString(ProjectStatus, projectStatus) == ProjectStatus.INITIATED){ 
+      color = " text-green-700 ";
+    }else if(getEnumValueFromString(ProjectStatus, projectStatus) == ProjectStatus.SUSPENDED) {
+      color = " text-yellow-400 ";
+    }else{
+      color = " text-red-700 ";
+    }
+    const className = "text-2xl font-bold decoration-gray-400 " + color;
+    return <h2 className={className}>{parseToEsp(projectStatus as string, ProjectStatus, ProjectStatusESP)}</h2>
   }
 
   return (
