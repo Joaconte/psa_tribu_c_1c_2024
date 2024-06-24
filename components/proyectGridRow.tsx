@@ -1,4 +1,4 @@
-import { getEnumValueFromString, parseProjectStatusToESP } from "@/utils/enumFunctions"
+import { getEnumValueFromString, parseProjectStatusToESP, projectStatusColor } from "@/utils/enumFunctions"
 import { ProjectStatus } from "@/utils/enums";
 import { Resource } from "@/utils/types";
 import Link from "next/link"
@@ -13,17 +13,7 @@ function CommonItem({text}: {text: any}){
 
 function StatusItem({project}: {project: any}){
 
-  var color
-  if(getEnumValueFromString(ProjectStatus, project.status) == ProjectStatus.INITIATED){ 
-    color = "text-green-700";
-  }else if(getEnumValueFromString(ProjectStatus, project.status) == ProjectStatus.SUSPENDED) {
-    color = "text-yellow-400";
-  }
-    else{
-    color = "text-red-700";
-  }
-
-  const classname = "flex justify-center " + color;
+  const classname = "flex justify-center " + projectStatusColor(project.status)
 
   return(
     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -57,7 +47,7 @@ export default function ProyectGridRow({ project, resources }: {project: any, re
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
       <Link className="flex justify-center font-medium text-blue-600 dark:text-blue-500 hover:underline"
               href={{ pathname: `/proyectos/${encodeURIComponent(project.projectCode)}/tareas`,
-                  query : `projectStatus=${project.status}`
+                  query : `projectStatus=${project.status}&projectName=${project.name}`
               }}>ver</Link>
       </td>
     </tr>

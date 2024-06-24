@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import TaskGridCell from "@/components/taskColumn"
 import { BackButton, ContinueButton } from "@/components/buttons"
 import { useRouter } from 'next/router'
-import { ProjectStatus, TaskStatus } from "@/utils/enums"
+import { ProjectStatus, ProjectStatusESP, TaskStatus } from "@/utils/enums"
 import LoadingScreen from "@/components/loadingScreen"
 import { BrowserRouter } from "react-router-dom"
-import { getEnumValueFromString, parseTaskStatusToESP } from "@/utils/enumFunctions"
+import { getEnumValueFromString, parseToEsp, projectStatusColor } from "@/utils/enumFunctions"
 import TaskColumn from "@/components/taskColumn"
 import { fetchItem } from "@/utils/fetchFunction"
 
@@ -24,6 +24,7 @@ export default function Tareas() {
 
   const projectCode = router.query.projectCode;
   const projectStatus = router.query.projectStatus;
+  const projectName = router.query.projectName;
   
   useEffect(() => {
 
@@ -55,11 +56,17 @@ export default function Tareas() {
     )
 }
 
+  function Status(){
+      const className = "text-2xl font-bold decoration-gray-400 " + projectStatusColor(projectStatus)
+      return <h2 className={className}>{parseToEsp(projectStatus, ProjectStatus, ProjectStatusESP)}</h2>
+  }
+
   return (
     <>
       <div className="container max-w-7xl mt-8 space-y-6" >
         <div className="mb-4">
-          <h1 className="text-3xl font-bold decoration-gray-400 ">Tareas</h1>
+          <h1 className="text-3xl font-bold decoration-gray-400">{projectName} - Tareas</h1>
+          <Status/>
         </div>
           <div className="flex">
             <div className="space-y-6 h-screen sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">  

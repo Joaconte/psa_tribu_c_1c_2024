@@ -20,3 +20,14 @@ export function parseTaskPriorityToESP(priority: string){
 export function parseTaskStatusToESP(status: string){
     return parseToEsp(status, TaskStatus, TaskStatusESP)
 }
+
+export function projectStatusColor(status: string){
+    var color
+    if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.INITIATED){ 
+        return "text-green-700";
+    }else if(getEnumValueFromString(ProjectStatus, status) == ProjectStatus.SUSPENDED) {
+        return "text-yellow-400";
+    }
+    return "text-red-700";
+    
+}

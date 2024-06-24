@@ -45,7 +45,7 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
     function handleSubmit() {
 
         if (!updatedTask.name)
-            alert("El proyecto tiene que tener un título");
+            alert("La tarea tiene que tener un título");
         else if (updatedTask.startDate && updatedTask.endDate && new Date(updatedTask.startDate) > new Date(updatedTask.endDate))
             alert("La fecha de finalizacion debe ser posterior a la fecha de inicio");
         else{

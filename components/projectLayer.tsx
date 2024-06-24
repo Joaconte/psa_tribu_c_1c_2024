@@ -42,7 +42,7 @@ function Label({text, value}: {text: string, value: string}){
                 <Label text="Fecha estimada de finalización:" value={project.endDate}/>
                 <Link className="flex items-cente font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   href={{ pathname:`/proyectos/${encodeURIComponent(project.projectCode)}/tareas`,
-                  query : `projectStatus=${project.status}`,
+                  query : `projectStatus=${project.status}&projectName=${project.name}`
                   }}>Ver tareas</Link>
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
