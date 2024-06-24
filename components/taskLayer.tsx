@@ -21,10 +21,15 @@ function Label({text, value}: {text: string, value: string}){
     )
   }
 
-  function ActualiceButton({ projectStatus, projectCode, taskCode }: { projectStatus: any, projectCode: any, taskCode:any }){
+  function ButtonsInitiatedProyect({ projectStatus, projectCode, taskCode }: { projectStatus: any, projectCode: any, taskCode:any }){
     if (getEnumValueFromString(ProjectStatus, projectStatus) === ProjectStatus.INITIATED){
-      return <ContinueButton text="Actualizar datos"
-        href = {`/proyectos/${projectCode}/tareas/${taskCode}/editarTarea`}/>
+      return (<>
+        <DeleteButton text = "Eliminar tarea" art = "la" item = "tarea" url = {`/tasks/${taskCode}`}/>
+        <ContinueButton text="Actualizar datos"
+          href = {`/proyectos/${projectCode}/tareas/${taskCode}/editarTarea`}/>
+      </>
+      
+      )
     }
       return null;
     }
@@ -63,9 +68,8 @@ function Label({text, value}: {text: string, value: string}){
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
-                  <DeleteButton text = "Eliminar tarea" art = "la" item = "tarea" url = {url}/>
+                  <ButtonsInitiatedProyect projectStatus ={projectStatus} projectCode={task.projectCode} taskCode={task.taskCode} />
                 </BrowserRouter>
-                <ActualiceButton projectStatus ={projectStatus} projectCode={task.projectCode} taskCode={task.taskCode} />
                </div>
             </div>  
         </div>  
