@@ -5,7 +5,7 @@ import { ProjectFormCreation } from "@/components/projectForm/projectFormCreatio
 import { BackButton } from "@/components/buttons";
 import { Project, Resource } from "@/utils/types";
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from "@/utils/fetchFunction";
+import { fetchItem, fetchResource } from "@/utils/fetchFunction";
 
 export default function NuevoProyecto() {
   
@@ -25,8 +25,8 @@ export default function NuevoProyecto() {
 
   useEffect(() => {
 
-    const url = `/recursos`
-    fetchItem(url, "resource",setResources, setLoading)
+
+    fetchResource(setResources, setLoading)
 
     const waitUntilLoad = async () => {
       try {

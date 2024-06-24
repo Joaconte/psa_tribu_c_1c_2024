@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { Task } from "@/utils/types";
 import { useRouter } from "next/router";
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from "@/utils/fetchFunction";
+import { fetchResource } from "@/utils/fetchFunction";
 
 export default function NuevaTarea() {
 
@@ -26,8 +26,8 @@ export default function NuevaTarea() {
   });
 
   useEffect(() => {
-    const url = `/recursos`
-    fetchItem(url, "resource",setResources, setLoading)
+
+    fetchResource(setResources, setLoading)
 
     setTask(prevTask => ({
       ...prevTask,

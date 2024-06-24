@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen";
+import Link from "next/link";
+import Image from 'next/image'
+
 
 export default function Proyectos() {
   const [loading, setLoading] = useState(true);
@@ -28,12 +31,8 @@ export default function Proyectos() {
           />
         </div>
         <div className="mt-6">
-          <a
-            href="/"
-            className="text-blue-500 hover:text-blue-700 underline"
-          >
-            Volver al inicio
-          </a>
+          <Link href="/" className="text-blue-500 hover:text-blue-700 underline">
+            Volver al inicio </Link>
         </div>
       </div>
     </div>

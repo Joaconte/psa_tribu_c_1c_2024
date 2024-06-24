@@ -3,7 +3,7 @@ import { Task } from "@/utils/types";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from "@/utils/fetchFunction";
+import { fetchItem, fetchResource } from "@/utils/fetchFunction";
 
 export default function Task() {
 
@@ -16,10 +16,10 @@ export default function Task() {
     const projectStatus = router.query.projectStatus;
 
   useEffect(() => {
-    var url = `/recursos`
-    fetchItem(url, "resource",setResources, setLoading)
+    
+    fetchResource(setResources, setLoading)
 
-    url= `/tasks/${taskCode}`
+    const url= `/tasks/${taskCode}`
     fetchItem(url, "task",setTask, setLoading)
   }, [taskCode]);
   

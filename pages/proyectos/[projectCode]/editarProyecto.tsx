@@ -5,7 +5,7 @@ import React from "react";
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from '@/utils/fetchFunction';
+import { fetchItem, fetchResource } from '@/utils/fetchFunction';
 
 
 export default function EditarProyecto() {
@@ -18,8 +18,7 @@ export default function EditarProyecto() {
 
   useEffect(() => {
 
-    url = `/recursos`
-    fetchItem(url, "resource",setResources, setLoading)
+    fetchResource(setResources, setLoading)
 
     var url = `/projects/${projectCode}`
     fetchItem(url, "project",setproject, setLoading)

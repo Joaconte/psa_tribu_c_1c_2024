@@ -5,7 +5,7 @@ import React from "react";
 import { BrowserRouter } from 'react-router-dom';
 import { TaskFormEdition } from '@/components/taskForm/taskFormEdition';
 import LoadingScreen from "@/components/loadingScreen"
-import { fetchItem } from '@/utils/fetchFunction';
+import { fetchItem, fetchResource } from '@/utils/fetchFunction';
 
 
 export default function EditarTarea() {
@@ -18,8 +18,7 @@ export default function EditarTarea() {
 
   useEffect(() => {
 
-    url = `/recursos`
-    fetchItem(url, "resource",setResources, setLoading)
+    fetchResource(setResources, setLoading)
     
     var url = `/tasks/${taskCode}`
     fetchItem(url, "task",setTask, setLoading)
