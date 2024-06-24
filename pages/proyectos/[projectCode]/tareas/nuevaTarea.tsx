@@ -17,12 +17,12 @@ export default function NuevaTarea() {
     taskCode: "",
     projectCode: "",
     name: "",
-    status: "Nueva",
+    status: "NEW",
     description: "",
     employeeCode: "",
     startDate: "",
     endDate: "",
-    priority: "Baja",
+    priority: "LOW",
   });
 
   useEffect(() => {
