@@ -30,7 +30,6 @@ export const fetchItem = async (url: any, str: string, setItem: any, setLoading:
   };
 
 
-
   export const fetchDeleteItem = async (url: any, str: string) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL + url}`, {

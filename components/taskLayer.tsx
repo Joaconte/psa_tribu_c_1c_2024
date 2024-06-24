@@ -33,11 +33,11 @@ function Label({text, value}: {text: string, value: string}){
     const resource = resources.find(resource => resource.legajo === task.employeeCode);
     var taskEmployee = ""
   
-
     if (resource)
       taskEmployee = `${resource.Nombre} ${resource.Apellido}`
 
     const url = `/tasks/${task.taskCode}`
+    
   
     return (
         <div className="mt-8 flex h-fulls flex-col space-x-0 space-y-15 bg-white">
@@ -53,7 +53,7 @@ function Label({text, value}: {text: string, value: string}){
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
-                  <DeleteButton text = "Eliminar tarea" item = "tarea" url = {url}/>
+                  <DeleteButton text = "Eliminar tarea" art = "la" item = "tarea" url = {url}/>
                 </BrowserRouter>
                 <ActualiceButton projectStatus ={projectStatus} projectCode={task.projectCode} taskCode={task.taskCode} />
                </div>

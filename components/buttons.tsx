@@ -21,11 +21,11 @@ const BackButton = ({text}: {text: string}): JSX.Element => {
     )
   }
 
-const DeleteButton = ({text, item, url}: {text: string, item: string, url: string}): JSX.Element => {
+const DeleteButton = ({text, item, url, art}: {text: string, item: string, url: string, art: string}): JSX.Element => {
     const navigate = useNavigate();
         
     function ConfirmAlert(){
-        if (window.confirm("Está seguro que desea eliminar la tarea")){
+        if (window.confirm("Está seguro que desea eliminar "+art+" "+item)){
             fetchDeleteItem(url, item)
             navigate(-1);
         }

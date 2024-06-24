@@ -47,7 +47,7 @@ function Label({text, value}: {text: string, value: string}){
                 <div className="flex justify-center items-center bg-white space-x-10"> 
                 <BrowserRouter>
                   <BackButton text = "Volver"/>
-                  <DeleteButton text = "Eliminar proyecto" item = "poryecto" url = {url}/>
+                  <DeleteButton text="Eliminar proyecto" art="el" item="poryecto" url={url}/>
                 </BrowserRouter>
                 <ContinueButton text="Actualizar datos" href = {`/proyectos/${project.projectCode}/editarProyecto`}/>
                 </div>
