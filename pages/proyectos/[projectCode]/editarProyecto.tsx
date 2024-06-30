@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 
 import React from "react";
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ProjectFormEdition } from '@/components/projectForm/projectFormEdition';
 import LoadingScreen from "@/components/loadingScreen"
 import { fetchItem, fetchResource } from '@/utils/fetchFunction';
@@ -30,15 +30,12 @@ export default function EditarProyecto() {
 };
 
   useEffect(() => {
-    fetchResource(setResources)
-  }, [projectCode]);
-
-  useEffect(() => {
       const url = `/projects/${projectCode}`
       fetchItem(url, "project",setproject, loadResource)
   }, [projectCode, resources]);
 
   if (loading) {
+    fetchResource(setResources)
     return <LoadingScreen/>
     
   }else if (!project) {

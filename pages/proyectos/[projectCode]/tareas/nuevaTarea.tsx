@@ -28,7 +28,6 @@ export default function NuevaTarea() {
 
 
   useEffect(() => {
-
     fetchResource(setResources)
     setLoading(false)
 
@@ -42,16 +41,16 @@ export default function NuevaTarea() {
   if (loading) {
     return <LoadingScreen/>
   }else 
-  return (
-    <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
-      <h1 className="text-4xl mb-5 font-bold ">Nueva tarea</h1>
-      <div className="container max-w-7xl mx-auto mt-8 space-y-7">
-      
-      <BrowserRouter>
-        <TaskFormCreation task={task} resources={resources}/>
-      </BrowserRouter>
-      
+    return (
+      <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
+        <h1 className="text-4xl mb-5 font-bold ">Nueva tarea</h1>
+        <div className="container max-w-7xl mx-auto mt-8 space-y-7">
+        
+        <BrowserRouter>
+          <TaskFormCreation task={task} resources={resources}/>
+        </BrowserRouter>
+        
+        </div>
       </div>
-    </div>
-  )
+    )
 }

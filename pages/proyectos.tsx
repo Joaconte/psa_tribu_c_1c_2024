@@ -25,8 +25,8 @@ export default function Proyectos() {
   const loadResources = async () => {
     if (projects){
       setProjects(projects.map((prev: any) => ({ ...prev, leader: getLeader(prev.leaderCode) })))
-      setLoading(false)
     }
+    setLoading(false)
   };
   
   useEffect(() => {
@@ -37,6 +37,7 @@ export default function Proyectos() {
     const url = `/projects`
     fetchItem(url, "proyectos",setProjects, loadResources)
   }, [resources]); 
+  
   
   if (loading ) {
     return <LoadingScreen/>

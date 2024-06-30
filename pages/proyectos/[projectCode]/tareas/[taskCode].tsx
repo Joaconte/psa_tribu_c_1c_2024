@@ -27,15 +27,12 @@ export default function Task() {
   };
 
     useEffect(() => {
-      fetchResource(setResources)
-    }, [taskCode]);
-
-    useEffect(() => {
       const url= `/tasks/${taskCode}`
       fetchItem(url, "task",setTask, loadResource)
     }, [taskCode, resources]);
 
-  if (loading || !task?.employee) {
+  if (loading || (!task?.employee && task?.employeeCode)) {
+    fetchResource(setResources)
     return <LoadingScreen/>
 
   }else if (!task) {

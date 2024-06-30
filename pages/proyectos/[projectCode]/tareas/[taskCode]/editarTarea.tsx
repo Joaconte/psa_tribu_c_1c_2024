@@ -31,20 +31,17 @@ export default function EditarTarea() {
   };
 
   useEffect(() => {
-    fetchResource(setResources)
-  }, [taskCode]);
-
-  useEffect(() => {
     const url= `/tasks/${taskCode}`
     fetchItem(url, "task",setTask, loadResource)
   }, [taskCode, resources]);
 
   if (loading || !task?.employee) {
-  return <LoadingScreen/>
+    fetchResource(setResources)
+    return <LoadingScreen/>
 
   } else if (!task) {
     return <div>Error al cargar la tarea</div>;
-    
+
   } else
   return(
     <div className="mt-8 flex h-full flex-col space-x-0 bg-white">
