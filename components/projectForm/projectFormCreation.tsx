@@ -79,7 +79,7 @@ import { getEnumValueFromString } from "@/utils/enumFunctions";
                 <ApplyButton text= {"Crear nuevo proyecto"} onClick={handleSubmit}/>
             </div>     
         </div>
-
-  );
-
+  );  
 }
+
+

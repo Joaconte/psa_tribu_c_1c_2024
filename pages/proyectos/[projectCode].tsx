@@ -5,32 +5,43 @@ import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/loadingScreen"
 import { fetchItem, fetchResource } from "@/utils/fetchFunction";
 
-
 export default function Proyecto() {
   const router = useRouter();
-  const [project, setproject] = useState<Project | null>(null);
-  const [resources, setResources] = useState([])
+  const [resources, setResources] = useState<Resource[]>()
   const [loading, setLoading] = useState(true);
+  const [project, setproject] = useState<Project>();
 
-  var projectCode = router.query.projectCode;
+  const { projectCode } = router.query;
+
+  const loadResource = async () => {
+
+    if (resources && project){
+      const resource = resources?.find(resource => resource.legajo === project?.leaderCode);
+      var leader = ""
+      if (resource)
+        leader = `${resource.Nombre} ${resource.Apellido}`
+      setproject((prev: any) => ({ ...prev, leader: leader }))
+      setLoading(false)
+    }
+};
 
   useEffect(() => {
-
-    fetchResource(setResources, setLoading)
-
-    const url = `/projects/${projectCode}`
-    fetchItem(url, "project",setproject, setLoading)
+    fetchResource(setResources)
   }, [projectCode]);
+
+  useEffect(() => {
+      const url = `/projects/${projectCode}`
+      fetchItem(url, "project",setproject, loadResource)
+  }, [projectCode, resources]);
 
   if (loading) {
     return <LoadingScreen/>
-  }
-
-  if (!project) {
+    
+  }else if (!project) {
     return <div>Error al cargar el proyecto</div>;
-  }
 
-  return (
-    <ProyectLayer project = {project} resources = {resources}/>
-  )
+  }else 
+    return (
+      <ProyectLayer project = {project}/>
+    )
 }

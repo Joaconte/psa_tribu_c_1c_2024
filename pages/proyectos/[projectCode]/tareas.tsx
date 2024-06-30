@@ -35,8 +35,9 @@ export default function Tareas() {
     
   if (loading) {
     return <LoadingScreen/>
-  }
-  if (!tasks) {
+
+  }else if (!tasks) {
+    
     return <div>Error al cargar las tareas</div>; 
   }
 

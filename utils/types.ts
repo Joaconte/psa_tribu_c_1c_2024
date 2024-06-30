@@ -13,6 +13,7 @@ export interface Project {
   endDate: string;
   description: string;
   status: string;
+  leader: string;
 }
 
 export interface Task {
@@ -25,6 +26,7 @@ export interface Task {
   startDate: string;
   endDate: string;
   priority: string;
+  employee: string;
 }
 
 export interface ISidebarItem {

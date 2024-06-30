@@ -9,6 +9,9 @@ import { fetchItem, fetchResource } from "@/utils/fetchFunction";
 
 export default function NuevoProyecto() {
   
+  const [loading, setLoading] = useState(true);
+  const [resources, setResources] = useState<Resource[]>([]);
+
   const [project] = useState<Project>({
     projectCode: "",
     leaderCode: "",
@@ -18,32 +21,30 @@ export default function NuevoProyecto() {
     endDate: "",
     description: "",
     status: "Iniciado",
+    leader: ""
   });
 
-  const [loading, setLoading] = useState(true);
-  const [resources, setResources] = useState<Resource[]>([]);
 
   useEffect(() => {
-
-    fetchResource(setResources, setLoading)
-
+    fetchResource(setResources)
+    setLoading(false)
   }, []);
 
   if (loading) {
     return <LoadingScreen/>
-  }
 
-  return (
+  } else
+    return (
 
-    <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
-      <h1 className="text-4xl mb-5 font-bold ">Nuevo proyecto</h1>
-      <div className="container max-w-7xl mx-auto mt-8 space-y-7">
-      
-      <BrowserRouter>
-        <ProjectFormCreation project={project} resources={resources}/>
-      </BrowserRouter>
-      
+      <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
+        <h1 className="text-4xl mb-5 font-bold ">Nuevo proyecto</h1>
+        <div className="container max-w-7xl mx-auto mt-8 space-y-7">
+        
+        <BrowserRouter>
+          <ProjectFormCreation project={project} resources={resources}/>
+        </BrowserRouter>
+        
+        </div>
       </div>
-    </div>
-  )
+    )
 }

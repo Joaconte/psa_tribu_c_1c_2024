@@ -23,11 +23,14 @@ export default function NuevaTarea() {
     startDate: "",
     endDate: "",
     priority: "LOW",
+    employee: "",
   });
+
 
   useEffect(() => {
 
-    fetchResource(setResources, setLoading)
+    fetchResource(setResources)
+    setLoading(false)
 
     setTask(prevTask => ({
       ...prevTask,
@@ -38,8 +41,7 @@ export default function NuevaTarea() {
   
   if (loading) {
     return <LoadingScreen/>
-  }
-
+  }else 
   return (
     <div className="mt-8 flex h-full flex-col space-x-0 space-y-4 bg-white">
       <h1 className="text-4xl mb-5 font-bold ">Nueva tarea</h1>
