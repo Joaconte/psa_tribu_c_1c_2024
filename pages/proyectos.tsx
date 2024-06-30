@@ -25,13 +25,9 @@ export default function Proyectos() {
   const loadResources = async () => {
     if (projects){
       setProjects(projects.map((prev: any) => ({ ...prev, leader: getLeader(prev.leaderCode) })))
+      setLoading(false)
     }
-    setLoading(false)
   };
-  
-  useEffect(() => {
-    fetchResource(setResources)     
-  }, []);
   
   useEffect(() => {
     const url = `/projects`
@@ -39,7 +35,8 @@ export default function Proyectos() {
   }, [resources]); 
   
   
-  if (loading ) {
+  if (loading) {
+    fetchResource(setResources)     
     return <LoadingScreen/>
   }else if (!projects) {
     return <div>Error al cargar los proyectos</div>; 
