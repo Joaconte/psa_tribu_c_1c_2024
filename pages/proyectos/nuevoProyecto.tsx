@@ -26,7 +26,7 @@ export default function NuevoProyecto() {
 
 
   useEffect(() => {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     setLoading(false)
   }, []);
 

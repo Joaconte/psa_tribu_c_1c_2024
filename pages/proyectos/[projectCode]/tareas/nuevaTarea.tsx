@@ -28,7 +28,7 @@ export default function NuevaTarea() {
 
 
   useEffect(() => {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     setLoading(false)
 
     setTask(prevTask => ({

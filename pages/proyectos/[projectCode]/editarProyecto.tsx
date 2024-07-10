@@ -35,7 +35,7 @@ export default function EditarProyecto() {
   }, [projectCode, resources]);
 
   if (loading) {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     return <LoadingScreen/>
     
   }else if (!project) {

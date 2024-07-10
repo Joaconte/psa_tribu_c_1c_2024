@@ -36,7 +36,7 @@ export default function EditarTarea() {
   }, [taskCode, resources]);
 
   if (loading || !task?.employee) {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     return <LoadingScreen/>
 
   } else if (!task) {

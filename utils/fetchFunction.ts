@@ -1,5 +1,3 @@
-import { Project, Resource } from "./types";
-
 export const fetchItem = async (url: any, str: string, setItem: any, loadItem: any) => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL + url}`);
@@ -15,9 +13,9 @@ export const fetchItem = async (url: any, str: string, setItem: any, loadItem: a
 };
 
 
-export const fetchResource = async (setItem: any) => {
-  
-  const url = 'https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos'
+export const fetchResource = async (setItem: any, setError:any) => {
+
+  const url = process.env.NEXT_PUBLIC_RESOURCES_API_URL
   //const url = process.env.NEXT_PUBLIC_API_URL+ "/recursos"
   try {
     const response = await fetch(`${url}`);
@@ -27,10 +25,10 @@ export const fetchResource = async (setItem: any) => {
     const data = await response.json();
     setItem(data);
   } catch (error) {
+    setError("Error al obtener los recursos, pruebe activando la extension de cors")
     console.error("Error fetching resources:", error);
   }
 };
-
 
 export const fetchDeleteItem = async (url: any, str: string) => {
   try {

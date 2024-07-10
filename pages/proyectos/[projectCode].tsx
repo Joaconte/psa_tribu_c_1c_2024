@@ -32,7 +32,7 @@ export default function Proyecto() {
 
 
   if (loading || (!project?.leader && project?.leaderCode)) {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     return <LoadingScreen/>
 
   }else if (!project) {

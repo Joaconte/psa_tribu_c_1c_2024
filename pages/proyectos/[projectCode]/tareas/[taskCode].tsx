@@ -32,7 +32,7 @@ export default function Task() {
     }, [taskCode, resources]);
 
   if (loading || (!task?.employee && task?.employeeCode)) {
-    fetchResource(setResources)
+    fetchResource(setResources, null)
     return <LoadingScreen/>
 
   }else if (!task) {

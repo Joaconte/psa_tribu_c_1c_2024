@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import ProyectGridRow from "@/components/proyectGridRow"
-import { ContinueButton } from "@/components/buttons"
+import {  ContinueButton } from "@/components/buttons"
 import LoadingScreen from "@/components/loadingScreen"
+import Notification from "@/components/Notification"
 import { fetchItem, fetchResource } from "@/utils/fetchFunction"
 import { Project } from "@/utils/types"
 
@@ -14,6 +15,7 @@ export default function Proyectos() {
   const [projects, setProjects] = useState<Project[]>()
   const [resources, setResources] = useState([])
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   function getLeader(leaderCode: string){
     const resource = resources.find(resource => resource["legajo"] === leaderCode)
@@ -36,9 +38,14 @@ export default function Proyectos() {
   
   
   if (loading) {
-    fetchResource(setResources)     
-    return <LoadingScreen/>
-  }else if (!projects) {
+    fetchResource(setResources, setError)   
+    return(
+      <>
+        <Notification message={error} />
+        <LoadingScreen/>
+      </>
+    )
+  }else if (!projects || !resources) {
     return <div>Error al cargar los proyectos</div>; 
   } else {
 
