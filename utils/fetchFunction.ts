@@ -15,8 +15,8 @@ export const fetchItem = async (url: any, str: string, setItem: any, loadItem: a
 
 export const fetchResource = async (setItem: any, setError:any) => {
 
-  const url = process.env.NEXT_PUBLIC_RESOURCES_API_URL
-  //const url = process.env.NEXT_PUBLIC_API_URL+ "/recursos"
+  //const url = process.env.NEXT_PUBLIC_RESOURCES_API_URL
+  const url = process.env.NEXT_PUBLIC_API_URL+ "/recursos"
   try {
     const response = await fetch(`${url}`);
     if (!response.ok) {
